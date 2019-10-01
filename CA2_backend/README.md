@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/dat3startcode/rest-jpa-devops-startcode.svg?branch=master)](https://travis-ci.org/dat3startcode/rest-jpa-devops-startcode)
+# CA2 project
+
+- This readme file is for the CA2 project which will be a big part the documentation of this project.
+
+TODO MAKE A NEW TRAVIS PART N GET ON WITH SETUP,( DUNNO CAN MAKE I GIVE ME A CALL BOUT IT).
 
 *This project is meant as start code for projects and exercises given in Flow-1+2 at http://cphbusiness.dk in the Study Program "AP degree in Computer Science"*
 
