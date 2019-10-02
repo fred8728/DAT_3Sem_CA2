@@ -1,10 +1,17 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 
@@ -16,11 +23,26 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String name;
     
+    @ElementCollection
+    private List <String> hobbies = new ArrayList();
+    
+    private String phone;
+    
+    
+    @ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinColumn(name="ADDRESS_ID")
+    private Address address;
     
     public Person() {
     }
-        
+
+    public Person(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,35 +50,37 @@ public class Person implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-    private String dummyStr1;
-    private String dummyStr2;
 
-    public Person(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
+    public String getName() {
+        return name;
     }
 
-    public String getDummyStr1() {
-        return dummyStr1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.dummyStr1 = dummyStr1;
+    public List<String> getHobbies() {
+        return hobbies;
     }
 
-    public String getDummyStr2() {
-        return dummyStr2;
+    public void addHobbies(String s) {
+        hobbies.add(s);
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.dummyStr2 = dummyStr2;
+    public String getPhone() {
+        return phone;
     }
-    
-    
-    
 
-   
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        address.getPeople().add(this);
+    }
 }
