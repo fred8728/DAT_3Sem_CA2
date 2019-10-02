@@ -18,20 +18,17 @@ public class MakeTestData {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
-        Person p = new Person ("Frederikke", "12345678");
         Address add = new Address("Mosebakken 5", 2670, "Greve");
+        Person p = new Person ("Frederikke", "12345678", add);
         p.addHobbies("Synge");
         p.addHobbies("Klaver");
-        p.setAddress(add);
         
-        Person p1 = new Person ("Marianne", "12354328");
+        Person p1 = new Person ("Marianne", "12354328", add);
         p1.addHobbies("Synge");
-        p1.setAddress(add);
         
-        Person p2 = new Person("Frank", "39294392");
         Address add1 = new Address("Ishøjvej 50", 2670, "Ishøj");
+        Person p2 = new Person("Frank", "39294392", add1);
         p2.addHobbies("Biler");
-        p2.setAddress(add1);
         
         try {
             em.getTransaction().begin();

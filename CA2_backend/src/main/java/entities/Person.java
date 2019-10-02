@@ -12,11 +12,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 
 @Entity
-@NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person")
+@NamedQueries({
+    @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
+    @NamedQuery(name = "Person.getAll", query = "SELECT p FROM Person p"),
+    @NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone")})
+
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,10 +43,13 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String name, String phone) {
+    public Person(String name, String phone, Address address) {
         this.name = name;
         this.phone = phone;
+        this.address = address;
     }
+
+    
 
     public int getId() {
         return id;
