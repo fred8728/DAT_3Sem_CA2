@@ -50,20 +50,20 @@ public class RegisterFacade {
     }
 
     public List<Person> getAllPersons() {
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
-            List<Person> id = em.createQuery("select b from Person b").getResultList();
-            return id;
+            return em.createQuery("SELECT p FROM Person p").getResultList();
         } finally {
             em.close();
-        }
+        }   
     }
 
-    public Person findPersonswithPhoneNumber(String Phone) {
+    public Person findPersonWithPhoneNumber(String phone) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            return (Person) em.createQuery("SELECT s FROM Person s WHERE s.phone = :phone", Person.class).setParameter("phone", Phone).getSingleResult();
+            return(Person) em.createQuery("SELECT s FROM Person s WHERE s.phone = :phone", Person.class).setParameter("phone", phone).getSingleResult();
+           
         } finally {
             em.close();
         }
