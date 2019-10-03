@@ -6,11 +6,12 @@
     <class>entities.Person</class>
     <class>entities.Company</class>
     <class>entities.Address</class>
+    <class>entities.Hobbies</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/CA2"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/startcode"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="ax2"/>

@@ -8,6 +8,7 @@ import facades.RegisterFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -56,7 +57,7 @@ public class RegisterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
 
-    public String getPersonByPhone(@PathParam("phone") String phone) {
+    public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.findPersonswithPhoneNumber(phone);
         return GSON.toJson(p);
     }
@@ -69,5 +70,18 @@ public class RegisterResource {
         FACADE.populate();
         return "{\"msg\":\"Done\"}";
     }
+    
+    @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("{phone}")
+    public String deletePerson(@PathParam("phone") int phone){
+        Person p = FACADE.findPersonswithPhoneNumber(phone);
+        Person p1 = FACADE.deletePerson(p.getPhone());
+        return GSON.toJson(p1);
+        
+    }
+    
+    
 
 }
