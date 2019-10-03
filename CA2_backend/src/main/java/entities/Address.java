@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,6 +24,9 @@ import javax.persistence.OneToMany;
  * @author fskn
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Address.deleteAllRows", query = "DELETE from Address"),
+    @NamedQuery(name = "Address.getAll", query = "SELECT p FROM Address p")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
