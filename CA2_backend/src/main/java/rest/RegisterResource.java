@@ -23,7 +23,7 @@ public class RegisterResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
             "pu",
-            "jdbc:mysql://localhost:3307/startcode",
+            "jdbc:mysql://localhost:3307/CA2",
             "dev",
             "ax2",
             EMF_Creator.Strategy.CREATE);
@@ -48,15 +48,14 @@ public class RegisterResource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllBooks() {
-        List<Person> books = FACADE.getAllPersons();
-        return GSON.toJson(books);
+    public String getAllPersons() {
+        List<Person> per = FACADE.getAllPersons();
+        return GSON.toJson(per);
     }
 
-    @Path("/{phone}")
+    @Path("/get/{phone}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-
     public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.findPersonswithPhoneNumber(phone);
         return GSON.toJson(p);

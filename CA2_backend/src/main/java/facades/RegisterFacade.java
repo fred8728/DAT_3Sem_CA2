@@ -64,13 +64,13 @@ public class RegisterFacade {
 
     //Virker - viser id, navn og phone
     public List<Person> getAllPersons() {
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             List <Person> getAll = em.createNamedQuery("Person.getAll").getResultList();
             return getAll;
         } finally {
             em.close();
-        }
+        }   
     }
 
     
