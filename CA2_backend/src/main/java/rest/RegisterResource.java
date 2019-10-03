@@ -47,17 +47,17 @@ public class RegisterResource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllBooks() {
-        List<Person> books = FACADE.getAllPersons();
-        return GSON.toJson(books);
+    public String getAllPersons() {
+        List<Person> per = FACADE.getAllPersons();
+        return GSON.toJson(per);
     }
 
-    @Path("/{phone}")
+    @Path("/get/{phone}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
 
     public String getPersonByPhone(@PathParam("phone") String phone) {
-        Person p = FACADE.findPersonswithPhoneNumber(phone);
+        Person p = FACADE.findPersonWithPhoneNumber(phone);
         return GSON.toJson(p);
     }
 
