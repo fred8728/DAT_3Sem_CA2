@@ -52,7 +52,7 @@ public class RegisterFacade {
     public List<Person> getAllPersons() {
         EntityManager em = getEntityManager();
         try {
-            List<Person> id = em.createQuery("select b from Person b").getResultList();
+            List<Person> id = em.createQuery("select b Person from Person b").getResultList();
             return id;
         } finally {
             em.close();
