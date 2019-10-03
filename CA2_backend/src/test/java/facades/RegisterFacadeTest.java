@@ -29,7 +29,7 @@ public class RegisterFacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode_test",
+                "jdbc:mysql://localhost:3307/CA_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
@@ -78,7 +78,7 @@ public class RegisterFacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
     }
 
 }
