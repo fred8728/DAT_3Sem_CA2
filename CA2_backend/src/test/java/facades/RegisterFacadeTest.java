@@ -1,5 +1,6 @@
 package facades;
 
+import facades.RegisterFacade;
 import utils.EMF_Creator;
 import entities.Person;
 import javax.persistence.EntityManager;
@@ -29,7 +30,7 @@ public class RegisterFacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/CA_test",
+                "jdbc:mysql://localhost:3307/startcode_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);

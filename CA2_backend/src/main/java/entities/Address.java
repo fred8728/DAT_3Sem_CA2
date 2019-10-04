@@ -33,9 +33,8 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String street;
-    private int zipcode;
-    private String city;
+    private String street;    
+    private String additionalinfo;    
     
     
     @OneToMany(mappedBy = "address", cascade = {CascadeType.PERSIST})
@@ -44,11 +43,30 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String street, int zipcode, String city) {
+    public Address(String street, String additionalinfo) {
         this.street = street;
-        this.zipcode = zipcode;
-        this.city = city;
+        this.additionalinfo = additionalinfo;
     }
+    
+    
+
+    public String getAdditionalinfo() {
+        return additionalinfo;
+    }
+
+    public void setAdditionalinfo(String additionalinfo) {
+        this.additionalinfo = additionalinfo;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
+    
 
     public Integer getId() {
         return id;
@@ -66,22 +84,6 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public int getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public List<Person> getPeople() {
         return persons;
     }
@@ -90,11 +92,12 @@ public class Address implements Serializable {
         this.persons.add(person);
     }
 
-    
     @Override
     public String toString() {
-        return "Address{" + "id=" + id + ", street=" + street + ", zipcode=" + zipcode + ", city=" + city + '}';
+        return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + '}';
     }
+
+    
 
     
 }
