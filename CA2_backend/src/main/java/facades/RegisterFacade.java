@@ -1,5 +1,6 @@
 package facades;
 
+import dto.PersonDTO;
 import entities.Address;
 import entities.Person;
 import java.util.List;
@@ -62,11 +63,11 @@ public class RegisterFacade {
     }
 
     //Virker - viser id, navn og phone
-    public List<Person> getAllPersons() {
+    public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
 
-            List <Person> getAll = em.createNamedQuery("Person.getAll").getResultList();
+            List <PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
             return getAll;
 
         } finally {
