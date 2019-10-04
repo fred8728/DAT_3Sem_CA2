@@ -114,7 +114,7 @@ public class RegisterFacade {
     
     
      */
-    
+    /*
     //Hvad gør denne?
     public void populate() {
         EntityManager em = emf.createEntityManager();
@@ -126,9 +126,9 @@ public class RegisterFacade {
         } finally {
             em.close();
         }
-    }
+    }*/
     
-    
+    /*
     //Virker
     public Person addPerson(String name, int phone, Address add, String hobby) {
         Person p = new Person (name, phone, add);
@@ -142,7 +142,7 @@ public class RegisterFacade {
         } finally {
             em.close();
         }
-    }
+    }*/
     
     //Virker ikke 100 % - ikke færdig 
     public Person deletePerson(int id) {
