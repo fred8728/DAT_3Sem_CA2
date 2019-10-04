@@ -28,7 +28,6 @@ import javax.persistence.Table;
  * @author fskn
  */
 @Entity
-@Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "Address.deleteAllRows", query = "DELETE from Address"),
     @NamedQuery(name = "Address.getAll", query = "SELECT p FROM Address p")})
@@ -44,11 +43,13 @@ public class Address implements Serializable {
     @Column(name = "ADDITINALINFO")
     private String additionalinfo;
 
-    @OneToMany(mappedBy = "person")
-    private Collection<Person> persons;
-    @JoinColumn(name = "CITYINFO_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private CityInfo cityInfo;
+    
+    @OneToMany(mappedBy = "address")
+    private List<Person> persons;
+    
+    
+    @OneToMany(mappedBy = "address")
+    private List <CityInfo> cityInfo;
 
     public Address() {
     }
@@ -56,35 +57,6 @@ public class Address implements Serializable {
     public Address(String street, String additionalinfo) {
         this.street = street;
         this.additionalinfo = additionalinfo;
-    }
-
-    public Collection<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(Collection<Person> persons) {
-        this.persons = persons;
-    }
-
-    public CityInfo getCityInfo() {
-        return cityInfo;
-    }
-
-    public void setCityInfo(CityInfo cityInfo) {
-        this.cityInfo = cityInfo;
-    }
-
-    
-    public String getAdditionalinfo() {
-        return additionalinfo;
-    }
-
-    public void setAdditionalinfo(String additionalinfo) {
-        this.additionalinfo = additionalinfo;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
     }
 
     public Integer getId() {
@@ -103,14 +75,35 @@ public class Address implements Serializable {
         this.street = street;
     }
 
+    public String getAdditionalinfo() {
+        return additionalinfo;
+    }
 
-    public void addPerson(Person person) {
+    public void setAdditionalinfo(String additionalinfo) {
+        this.additionalinfo = additionalinfo;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void addPersons(Person person) {
         this.persons.add(person);
+    }
+
+    public List<CityInfo> getCityInfo() {
+        return cityInfo;
+    }
+
+    public void addCityInfo(CityInfo info){
+        this.cityInfo.add(info);
     }
 
     @Override
     public String toString() {
-        return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + '}';
+        return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + ", cityInfo=" + cityInfo + '}';
     }
+
+    
 
 }

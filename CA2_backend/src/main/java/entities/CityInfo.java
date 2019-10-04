@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +24,6 @@ import javax.persistence.Table;
  * @author emils
  */
 @Entity
-@Table(name = "CITYINFO")
 public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,8 +35,10 @@ public class CityInfo implements Serializable {
     private int zipcode;
     @Column(name = "CITY")
     private String city;
-    @OneToMany(mappedBy = "cityInfo")
-    private Collection<Address> address;
+    
+    
+    @ManyToOne (cascade = CascadeType.PERSIST)
+    private Address address;
 
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
@@ -70,33 +72,19 @@ public class CityInfo implements Serializable {
         this.city = city;
     }
 
-    public void addAddress(Address s) {
-        address.add(s);
+    public Address getAddress() {
+        return address;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CityInfo)) {
-            return false;
-        }
-        CityInfo other = (CityInfo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void addAddress(Address address) {
+        this.address = address;
+        address.getCityInfo().add(this);
     }
 
     @Override
     public String toString() {
-        return "entities.CityInfo[ id=" + id + " ]";
+        return "CityInfo{" + "id=" + id + ", zipcode=" + zipcode + ", city=" + city + '}';
     }
+
 
 }

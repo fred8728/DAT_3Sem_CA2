@@ -5,7 +5,6 @@
  */
 package entities;
 
-import facades.RegisterFacade;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,26 +24,26 @@ public class MakeTestData {
         CityInfo ci = new CityInfo(1234,"lyngby");
         Hobby hob = new Hobby("100meter-kagebord","når man tager en tur til joland");
         
-        //  Person p1 = new Person ("Marianne", "12354328", "add",hob,ph,add);
-        
         Address add1 = new Address("Ishøjvej 50", "Ishøj");
         Person p2 = new Person("Frank", "39294392", "add1");
         
         p.addHobby(hob);
         p.addPhone(ph);
-        add.addPerson(p);
+        add.addPersons(p);
         ci.addAddress(add);
         
         try {
             em.getTransaction().begin();
+            em.persist(p);
+            em.persist(add);
             em.persist(ci);
-        //    em.persist(p1);
-          //  em.persist(p2);
+            
             em.getTransaction().commit();
 
         } finally {
             em.close();
         }
+    
         
 //        RegisterFacade facade = RegisterFacade.getRegisterFacade(emf);
 //        System.out.println("Person with phone__________");

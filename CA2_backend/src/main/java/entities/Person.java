@@ -22,12 +22,10 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "PERSON")
-
 @NamedQueries({
     @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
     @NamedQuery(name = "Person.getAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
+    //@NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.count", query = "SELECT count(p) FROM Person p")})
 
 public class Person implements Serializable {
@@ -43,14 +41,16 @@ public class Person implements Serializable {
     private String lastName;
     @Column(name = "EMAIL")
     private String email;
-    @ManyToMany(mappedBy = "personCollection")
-    private Collection<Hobby> hobbyCollection;
     
-    @OneToMany(mappedBy = "person")
-    private Collection<Phone> phoneCollection;  
+    @ManyToMany (cascade = CascadeType.PERSIST)
+    private List<Hobby> hobbyCollection;
     
-    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
-    @ManyToOne
+    
+    @OneToMany(mappedBy = "person", cascade=CascadeType.PERSIST)
+    private List<Phone> phoneCollection;  
+    
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name="ADDRESS_ID")
     private Address address;
     
     public Person() {
@@ -61,16 +61,15 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
-
-    public Person(String firstName, String lastName, String email, Collection<Hobby> hobbyCollection, Collection<Phone> phone, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.hobbyCollection = hobbyCollection;
-        this.phoneCollection = phone;
-        this.address = address;
-    }
     
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -94,36 +93,31 @@ public class Person implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public int getId() {
-        return id;
+
+    public List<Hobby> getHobbyCollection() {
+        return hobbyCollection;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return firstName;
-    }
-
-    public void setName(String name) {
-        this.firstName = name;
-    }
-
-    public void addPhone(Phone ph){
-        phoneCollection.add(ph);
-    }
-    
-    
-    public void addHobby(Hobby hob){
+    public void addHobby(Hobby hob) {
         hobbyCollection.add(hob);
+    }
+
+    public List<Phone> getPhoneCollection() {
+        return phoneCollection;
+    }
+
+    public void addPhone(Phone phone) {
+        phoneCollection.add(phone);
     }
 
     public Address getAddress() {
         return address;
     }
 
+    public void addAddress(Address address) {
+        this.address = address;
+        address.getPersons().add(this);
+    }
 
     @Override
     public String toString() {

@@ -115,36 +115,9 @@ public class RegisterFacade {
     
     
      */
-    /*
-    //Hvad gør denne?
-    public void populate() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
-            em.persist(new Address("landevej","brøndby"));
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-    }*/
+   
     
-<<<<<<< HEAD
-//    //Virker
-//    public Person addPerson(String name, int phone, Address add, String hobby) {
-//        Person p = new Person (name, phone, add);
-//        p.addHobbies(hobby);
-//        EntityManager em = emf.createEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(p);
-//            em.getTransaction().commit();
-//            return p;
-//        } finally {
-//            em.close();
-//        }
-//    }
-=======
+
     /*
     //Virker
     public Person addPerson(String name, int phone, Address add, String hobby) {
@@ -160,7 +133,6 @@ public class RegisterFacade {
             em.close();
         }
     }*/
->>>>>>> 425061310186ca26b3a8fab2a1a432c2d558c0b0
     
     //Virker ikke 100 % - ikke færdig 
     public Person deletePerson(int id) {

@@ -25,7 +25,6 @@ import javax.persistence.Table;
  * @author emils
  */
 @Entity
-@Table(name = "HOBBY")
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,17 +36,15 @@ public class Hobby implements Serializable {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
-    @JoinTable(name = "HOBBY_PERSON", joinColumns = {
-        @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private Collection<Person> personCollection;
+    //@JoinTable(name = "HOBBY_PERSON", joinColumns = {
+      //  @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        //@JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
+    
+    @ManyToMany(mappedBy = "hobbyCollection")
+    private List<Person> personCollection;
+    
 
     public Hobby() {
-    }
-
-    public void addPerson(Person s) {
-        personCollection.add(s);
     }
 
     public Hobby(String name, String description) {
@@ -79,29 +76,22 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public List<Person> getPersons() {
+        return personCollection;
+    }
+    
+    public void setPerson(List<Person> person) {
+        this.personCollection = person;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Hobby)) {
-            return false;
-        }
-        Hobby other = (Hobby) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void addPerson(Person p) {
+        this.personCollection.add(p);
     }
 
     @Override
     public String toString() {
-        return "entities.Hobby[ id=" + id + " ]";
+        return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
 
+    
 }
