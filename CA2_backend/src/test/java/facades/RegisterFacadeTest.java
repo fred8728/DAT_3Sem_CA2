@@ -1,6 +1,6 @@
 package facades;
 
-import facades.RegisterFacade;
+
 import utils.EMF_Creator;
 import entities.Person;
 import javax.persistence.EntityManager;
