@@ -62,7 +62,6 @@ public class RegisterResource {
         return GSON.toJson(p);
     }
     
-
     
     @Path("/get/all/{city}")
     @GET
