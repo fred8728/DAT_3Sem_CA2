@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.RegisterFacade;
@@ -49,7 +50,7 @@ public class RegisterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPersons() {
-        List<Person> per = FACADE.getAllPersons();
+        List<PersonDTO> per = FACADE.getAllPersons();
         return GSON.toJson(per);
     }
 
@@ -67,7 +68,11 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String populate() {
 
+<<<<<<< HEAD
 //        FACADE.populate();
+=======
+        //FACADE.populate();
+>>>>>>> 1cd86f4494e06770067e2fd239afa8a2306a593d
         return "{\"msg\":\"Done\"}";
     }
     
