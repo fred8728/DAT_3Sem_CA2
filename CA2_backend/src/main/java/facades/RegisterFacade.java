@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -38,35 +39,63 @@ public class RegisterFacade {
         return emf.createEntityManager();
     }
 
-    //TODO Remove/Change this before use
-    public long getPersonCount() {
+    //Virker - Get person count
+    public int getPersonCount() {
         EntityManager em = emf.createEntityManager();
         try {
-            long personCount = (long) em.createQuery("SELECT COUNT(r) FROM Person r").getSingleResult();
-            return personCount;
+            Query query = em.createNamedQuery("Person.count");
+            return  Integer.parseInt(query.getSingleResult().toString());
+        } finally {
+            em.close();
+        }
+    }
+    
+    
+    //skal laves
+    public int getCountOfHobby() {
+        EntityManager em = emf.createEntityManager();
+        try {
+           
+            return 0;
         } finally {
             em.close();
         }
     }
 
+    //Virker - viser id, navn og phone
     public List<Person> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
 
-            return em.createQuery("SELECT p FROM Person p").getResultList();
+            List <Person> getAll = em.createNamedQuery("Person.getAll").getResultList();
+            return getAll;
 
         } finally {
             em.close();
         }   
     }
 
-    public Person findPersonWithPhoneNumber(String phone) {
+    
+    //Virker - anvend namedquery i person klassen
+    public Person findPersonswithPhoneNumber(int Phone) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            return(Person) em.createQuery("SELECT s FROM Person s WHERE s.phone = :phone", Person.class).setParameter("phone", phone).getSingleResult();
-           
+            return (Person) em.createQuery("SELECT s FROM Person s WHERE s.phone = :phone", Person.class)
+                    .setParameter("phone", Phone).getSingleResult();
         } finally {
+            em.close();
+        }
+    }
+    
+    //Virker
+    public List<Person> getAllFromCity(String city){
+        EntityManager em = emf.createEntityManager();
+        try{
+            Query query = em.createQuery("SELECT p FROM Person p JOIN p.address a where a.city=:city")
+                    .setParameter("city", city);
+            return query.getResultList(); 
+        }finally{
             em.close();
         }
     }
@@ -86,6 +115,8 @@ public class RegisterFacade {
     
     
      */
+    
+    //Hvad gør denne?
     public void populate() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -97,4 +128,40 @@ public class RegisterFacade {
             em.close();
         }
     }
+    
+    
+    //Virker
+    public Person addPerson(String name, int phone, Address add, String hobby) {
+        Person p = new Person (name, phone, add);
+        p.addHobbies(hobby);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(p);
+            em.getTransaction().commit();
+            return p;
+        } finally {
+            em.close();
+        }
+    }
+    
+    //Virker ikke 100 % - ikke færdig 
+    public Person deletePerson(int id) {
+        EntityManager em = emf.createEntityManager();
+        Person p = em.find(Person.class, id);
+        Address add = p.getAddress();
+        Person p1 = new Person();
+        try {
+            em.getTransaction().begin();
+            em.remove(p);
+            em.remove(add);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+        return p;
+    }
+    
+    
+    
 }

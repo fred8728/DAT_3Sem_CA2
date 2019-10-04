@@ -20,7 +20,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
     @NamedQuery(name = "Person.getAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone")})
+    @NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
+    @NamedQuery(name = "Person.count", query = "SELECT count(p) FROM Person p")})
 
 public class Person implements Serializable {
 
@@ -33,17 +34,17 @@ public class Person implements Serializable {
     @ElementCollection
     private List <String> hobbies = new ArrayList();
     
-    private String phone;
+    private int phone;
     
     
-    @ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name="ADDRESS_ID")
     private Address address;
     
     public Person() {
     }
 
-    public Person(String name, String phone, Address address) {
+    public Person(String name, int phone, Address address) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -75,11 +76,11 @@ public class Person implements Serializable {
         hobbies.add(s);
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
@@ -91,4 +92,11 @@ public class Person implements Serializable {
         this.address = address;
         address.getPeople().add(this);
     }
+
+    @Override
+    public String toString() {
+        return "Person{" + "id=" + id + ", name=" + name + ", phone=" + phone + '}';
+    }
+
+   
 }
