@@ -7,23 +7,28 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author fskn
  */
 @Entity
+@Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "Address.deleteAllRows", query = "DELETE from Address"),
     @NamedQuery(name = "Address.getAll", query = "SELECT p FROM Address p")})
@@ -32,13 +37,18 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
-    private String street;    
-    private String additionalinfo;    
-    
-    
-    @OneToMany(mappedBy = "address", cascade = {CascadeType.PERSIST})
-    private List <Person> persons = new ArrayList();
+    @Column(name = "STREET")
+    private String street;
+    @Column(name = "ADDITINALINFO")
+    private String additionalinfo;
+
+    @OneToMany(mappedBy = "person")
+    private Collection<Person> persons;
+    @JoinColumn(name = "CITYINFO_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private CityInfo cityInfo;
 
     public Address() {
     }
@@ -47,9 +57,24 @@ public class Address implements Serializable {
         this.street = street;
         this.additionalinfo = additionalinfo;
     }
-    
-    
 
+    public Collection<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Collection<Person> persons) {
+        this.persons = persons;
+    }
+
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+    }
+
+    
     public String getAdditionalinfo() {
         return additionalinfo;
     }
@@ -58,15 +83,9 @@ public class Address implements Serializable {
         this.additionalinfo = additionalinfo;
     }
 
-    public List<Person> getPersons() {
-        return persons;
-    }
-
     public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
-
-    
 
     public Integer getId() {
         return id;
@@ -84,9 +103,6 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public List<Person> getPeople() {
-        return persons;
-    }
 
     public void addPerson(Person person) {
         this.persons.add(person);
@@ -97,7 +113,4 @@ public class Address implements Serializable {
         return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + '}';
     }
 
-    
-
-    
 }

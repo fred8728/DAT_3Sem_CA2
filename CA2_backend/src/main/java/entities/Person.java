@@ -2,8 +2,10 @@ package  entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +13,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "PERSON")
+
 @NamedQueries({
     @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
     @NamedQuery(name = "Person.getAll", query = "SELECT p FROM Person p"),
@@ -28,20 +35,22 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private int id;
+    @Column(name = "FIRSTNAME")
     private String firstName;
+    @Column(name = "LASTNAME")
     private String lastName;
+    @Column(name = "EMAIL")
     private String email;
+    @ManyToMany(mappedBy = "personCollection")
+    private Collection<Hobby> hobbyCollection;
     
+    @OneToMany(mappedBy = "person")
+    private Collection<Phone> phoneCollection;  
     
-    @ElementCollection
-    private List <String> hobbies = new ArrayList();
-    
-    private int phone;
-    
-    
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name="ADDRESS_ID")
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
+    @ManyToOne
     private Address address;
     
     public Person() {
@@ -53,6 +62,15 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    public Person(String firstName, String lastName, String email, Collection<Hobby> hobbyCollection, Collection<Phone> phone, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbyCollection = hobbyCollection;
+        this.phoneCollection = phone;
+        this.address = address;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -76,8 +94,6 @@ public class Person implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    
     
     public int getId() {
         return id;
@@ -95,30 +111,19 @@ public class Person implements Serializable {
         this.firstName = name;
     }
 
-    public List<String> getHobbies() {
-        return hobbies;
+    public void addPhone(Phone ph){
+        phoneCollection.add(ph);
     }
-
-    public void addHobbies(String s) {
-        hobbies.add(s);
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
+    
+    
+    public void addHobby(Hobby hob){
+        hobbyCollection.add(hob);
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-        address.getPeople().add(this);
-    }
 
     @Override
     public String toString() {

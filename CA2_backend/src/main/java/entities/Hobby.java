@@ -6,24 +6,54 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author emils
  */
 @Entity
+@Table(name = "HOBBY")
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "DESCRIPTION")
     private String description;
+    @JoinTable(name = "HOBBY_PERSON", joinColumns = {
+        @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Person> personCollection;
+
+    public Hobby() {
+    }
+
+    public void addPerson(Person s) {
+        personCollection.add(s);
+    }
+
+    public Hobby(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -31,6 +61,22 @@ public class Hobby implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -57,5 +103,5 @@ public class Hobby implements Serializable {
     public String toString() {
         return "entities.Hobby[ id=" + id + " ]";
     }
-    
+
 }

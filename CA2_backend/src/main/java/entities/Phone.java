@@ -6,34 +6,45 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author emils
  */
 @Entity
+@Table(name = "PHONE")
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "NUMBER")
     private int number;
-    private String decription;
+    @Column(name = "DESCRIPTION")
+    private String description;
+    @JoinColumn(name = "person_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Person person;
 
     public Phone() {
     }
 
     public Phone(int number, String decription) {
         this.number = number;
-        this.decription = decription;
+        this.description = decription;
     }
 
-    
     public int getNumber() {
         return number;
     }
@@ -43,15 +54,13 @@ public class Phone implements Serializable {
     }
 
     public String getDecription() {
-        return decription;
+        return description;
     }
 
     public void setDecription(String decription) {
-        this.decription = decription;
+        this.description = decription;
     }
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -84,5 +93,5 @@ public class Phone implements Serializable {
     public String toString() {
         return "entities.Phone[ id=" + id + " ]";
     }
-    
+
 }

@@ -6,24 +6,37 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author emils
  */
 @Entity
+@Table(name = "CITYINFO")
 public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "ZIPCODE")
     private int zipcode;
+    @Column(name = "CITY")
     private String city;
+    @OneToMany(mappedBy = "cityInfo")
+    private Collection<Address> address;
 
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
@@ -57,8 +70,10 @@ public class CityInfo implements Serializable {
         this.city = city;
     }
 
-    
-    
+    public void addAddress(Address s) {
+        address.add(s);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

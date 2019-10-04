@@ -121,7 +121,7 @@ public class RegisterFacade {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Address.deleteAllRows").executeUpdate();
-            em.persist(new Address("landevej", 2660, "brøndby"));
+            em.persist(new Address("landevej","brøndby"));
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -129,20 +129,20 @@ public class RegisterFacade {
     }
     
     
-    //Virker
-    public Person addPerson(String name, int phone, Address add, String hobby) {
-        Person p = new Person (name, phone, add);
-        p.addHobbies(hobby);
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
-            return p;
-        } finally {
-            em.close();
-        }
-    }
+//    //Virker
+//    public Person addPerson(String name, int phone, Address add, String hobby) {
+//        Person p = new Person (name, phone, add);
+//        p.addHobbies(hobby);
+//        EntityManager em = emf.createEntityManager();
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(p);
+//            em.getTransaction().commit();
+//            return p;
+//        } finally {
+//            em.close();
+//        }
+//    }
     
     //Virker ikke 100 % - ikke færdig 
     public Person deletePerson(int id) {
