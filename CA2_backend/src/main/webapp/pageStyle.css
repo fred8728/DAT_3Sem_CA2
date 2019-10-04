@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-10-2019, 14:43:15
+    Author     : ahmed
+*/
+
+.body{
+
+    background-color: lightblue;
+    background-color: maroon;
+}
+#listContainer{
+    background-color: lightgoldenrodyellow;
+    border:5%;
+    border-width: 1px;
+    position:absolute;
+    left: 5%;
+
+}
+#singleList{
+    padding : 5px;
+    width: 50%;
+
+}
+
