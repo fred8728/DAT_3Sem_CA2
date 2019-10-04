@@ -49,8 +49,7 @@ public class RegisterFacade {
             em.close();
         }
     }
-    
-    
+       
     //skal laves
     public int getCountOfHobby() {
         EntityManager em = emf.createEntityManager();
