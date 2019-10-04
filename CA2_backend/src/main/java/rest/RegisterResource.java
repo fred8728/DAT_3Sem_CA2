@@ -60,6 +60,7 @@ public class RegisterResource {
         Person p = FACADE.findPersonswithPhoneNumber(phone);
         return GSON.toJson(p);
     }
+    
 
     @Path("/populate")
     @GET
@@ -70,7 +71,58 @@ public class RegisterResource {
         return "{\"msg\":\"Done\"}";
     }
     
+    @Path("/get/all/{city}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonByCity(@PathParam("city") String city) {
+        List<Person> p = FACADE.getAllFromCity(city);
+        return GSON.toJson(p);
+    }
     
+//    @Path("/get/all/{hobbie}")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getPersonByCity(@PathParam("hobbie") String hobbie) {
+//        List<Person> p = FACADE.findAllPersonswithHobbie(hobbie);
+//        return GSON.toJson(p);
+//    }
+    
+//    @Path("/get/count/{hobbie}")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getPersonByCity(@PathParam("hobbie") strring hobbie) {
+//        int p = FACADE.getAllHobbieCount(hobbie);
+//        return GSON.toJson(p);
+//    }
+    
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("{id}")
+//    public String editPerson(String personAsJson, @PathParam("id") int id) {
+////        Date date = new Date();
+//        
+//        Person pOrignal = FACADE.getPerson(id);
+//        Person NewPersonVal = GSON.fromJson(personAsJson, Person.class);
+//        pOrignal.setName(NewPersonVal.getName());
+//        pOrignal.setPhone(NewPersonVal.getPhone());
+//        pOrignal.setAddress(NewPersonVal.getAddress());
+//        
+//        // makes that the value return is on a good json format
+//        return GSON.toJson(pOrignal);
+//    }
+    
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String addPerson(String personAsJson) {
+//        Person personNew = gson.fromJson(personAsJson, Person.class);
+//        persons.put(nextId, personNew);
+//        personNew.setId(nextId);
+//        nextId++;
+//        System.out.println("val sent");
+//        return gson.toJson(personNew);
+//    }
     
     //Delete er ikke testet endnu - 
     @DELETE

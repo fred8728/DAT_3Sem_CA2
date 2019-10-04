@@ -81,5 +81,6 @@ public class RegisterFacadeTest {
     public void testAFacadeMethod() {
         assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
     }
+    
 
 }
