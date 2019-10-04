@@ -23,11 +23,10 @@ public class MakeTestData {
         Phone ph = new Phone (12345678,"test");
         CityInfo ci = new CityInfo(1234,"lyngby");
         Hobby hob = new Hobby("100meter-kagebord","når man tager en tur til joland");
-        
         Address add1 = new Address("Ishøjvej 50", "Ishøj");
         Person p2 = new Person("Frank", "39294392", "add1");
         
-        p.addHobby(hob);
+        p.addHobby(hob);        
         p.addPhone(ph);
         add.addPersons(p);
         ci.addAddress(add);
@@ -37,6 +36,8 @@ public class MakeTestData {
             em.persist(p);
             em.persist(add);
             em.persist(ci);
+            em.persist(hob);
+            em.persist(ph);
             
             em.getTransaction().commit();
 

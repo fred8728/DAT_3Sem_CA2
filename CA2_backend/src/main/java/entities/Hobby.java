@@ -36,13 +36,12 @@ public class Hobby implements Serializable {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
-    //@JoinTable(name = "HOBBY_PERSON", joinColumns = {
-      //  @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        //@JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
-    
+    @JoinTable(name = "HOBBY_PERSON", joinColumns = {
+        @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
+
     @ManyToMany(mappedBy = "hobbyCollection")
     private List<Person> personCollection;
-    
 
     public Hobby() {
     }
@@ -79,7 +78,7 @@ public class Hobby implements Serializable {
     public List<Person> getPersons() {
         return personCollection;
     }
-    
+
     public void setPerson(List<Person> person) {
         this.personCollection = person;
     }
@@ -93,5 +92,4 @@ public class Hobby implements Serializable {
         return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
 
-    
 }
