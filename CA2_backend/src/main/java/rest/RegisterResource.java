@@ -68,11 +68,9 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String populate() {
 
-<<<<<<< HEAD
-//        FACADE.populate();
-=======
+
         //FACADE.populate();
->>>>>>> 1cd86f4494e06770067e2fd239afa8a2306a593d
+
         return "{\"msg\":\"Done\"}";
     }
     
