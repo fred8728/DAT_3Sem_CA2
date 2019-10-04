@@ -70,13 +70,17 @@ public class RegisterResource {
         return "{\"msg\":\"Done\"}";
     }
     
+    
+    
+    //Delete er ikke testet endnu - 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("{phone}")
     public String deletePerson(@PathParam("phone") int phone){
         Person p = FACADE.findPersonswithPhoneNumber(phone);
-        Person p1 = FACADE.deletePerson(p.getPhone());
+        int id = p.getId();
+        Person p1 = FACADE.deletePerson(id);
         return GSON.toJson(p1);
         
     }
