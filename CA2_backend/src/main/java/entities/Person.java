@@ -33,7 +33,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "PERSON_ID")
     private int id;
     @Column(name = "FIRSTNAME")
     private String firstName;
@@ -101,7 +101,7 @@ public class Person implements Serializable {
     }
 
     public void addHobby(Hobby hob) {
-        hobbyCollection.add(hob);
+        this.hobbyCollection.add(hob);
     }
 
     public List<Phone> getPhoneCollection() {
@@ -109,7 +109,7 @@ public class Person implements Serializable {
     }
 
     public void addPhone(Phone phone) {
-        phoneCollection.add(phone);
+        this.phoneCollection.add(phone);
     }
 
     public Address getAddress() {
