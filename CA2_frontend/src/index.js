@@ -1,6 +1,77 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import jokes from "./jokes";
 
+document.getElementById("but3").addEventListener("click", function(){
+    document.getElementById("div2").innerhtml ="<p> Yeet</p>"  ;})
+
+document.getElementById("but2").addEventListener("click", function(){
+    document.getElementById("div1").innerhtml =   "<p> The following is a list of the sprint log which we have chosen to make for this project <br>" +
+     "it has been split into tree mini sprint which is shown in the list down below. <br>" +
+     "There will be tried to complete as many of the given task as possible in the following week to this project." +
+ "</p>" +
+ "<div id = \"singleList\">" +
+    "<ul>" +
+         "Sprint one (Friday 04/10 - Monday 07/10):" +
+
+        "<li>" +
+             "The API description must be almost (we are using an iterative process) complete and available as a page on your deployed project." +
+         "</li>" +
+         "<li>" +
+             "The SCRUM plan for the three mini-sprints must be available as a page on your deployed project. This can either be a copy of our suggestion below, or Sprint-1 as" + 
+             "given below and your own plan for the remaining sprints if your “product owner” agrees (red students)." +
+         "</li>" + 
+         "<li>" +
+             "The CI-pipeline must be setup" +
+         "</li>" + 
+         "<li>" +
+             "Some of the Entity Classes and the Facade(s) must be ready with supplementing tests" +
+         "</li>" +
+     "</ul>" +
+ "</div>" +
+ 
+ "<div id = \"singleList\">" +
+ "<ul>" +
+     "Sprint two (Tuesday 8/10 - Wednesday 9/10):" +
+     "<li>" +
+         "Most of the Entity Classes should be ready" +
+     "</li>" +
+     "<li>" +
+         "Sample data should be available in the dev-database" +
+     "</li>" + 
+     "<li>" +
+         "Some of the endpoints (as a minimum a GET, POST and PUT) must be ready with the corresponding DTO’s and integrations tests" +
+     "</li>" +  
+ "</ul>" +
+ "</div>" +
+ 
+ "<div id = \"singleList\">" +
+ "<ul>" +
+     "Sprint three (Thursday 10/10- Sunday 13/10):"+
+     "<li>"+
+         "Complete the API (as much as you have time for)"+
+         "<ul>"+
+             "<li type = \"square\">"+
+                 "Get all persons with a given hobby"+
+             "</li>"+
+             "<li type = \"square\">"+
+                 "Get all persons living in a given city"+
+             "</li>"+
+             "<li type = \"square\">"+
+                 "Get the count of people with a given hobby"+
+             "</li>"+
+             "<li type = \"square\">"+
+                 "Get a list of all zip codes in Denmark"+
+             "</li>"+
+             "<li type = \"square\">"+
+                 "Get a list of companies with more than xx employes(RED LEVEL)"+
+             "</li>"+
+             "<li type = \"square\">"+
+                 "Create a Person, with hobbies, phone, address etc."+
+             "</li> </ul> </li> <li>" +
+        " Complete documentation and prepare for your review presentation after the holiday" +
+     + " </li> </ul></div>" ;
+
+});
 document.getElementById("but1").addEventListener("click", function(){
     document.getElementById("div1").innerHTML = "<table border=" + "1px" + 
     "> <tr>" +
