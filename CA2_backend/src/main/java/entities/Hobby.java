@@ -29,7 +29,7 @@ public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HOBBY_ID")
     private Long id;
     @Column(name = "NAME")
@@ -41,7 +41,7 @@ public class Hobby implements Serializable {
         @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
 
     @ManyToMany(mappedBy = "hobbyCollection")
-    private List<Person> personCollection;
+    private Collection<Person> personCollection = new ArrayList();
 
     public Hobby() {
     }
@@ -75,12 +75,8 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public List<Person> getPersons() {
+    public Collection<Person> getPersons() {
         return personCollection;
-    }
-
-    public void setPerson(List<Person> person) {
-        this.personCollection = person;
     }
 
     public void addPerson(Person p) {

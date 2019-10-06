@@ -26,7 +26,7 @@ public class MakeTestData {
         Address add1 = new Address("Ishøjvej 50", "Ishøj");
         Person p2 = new Person("Frank", "39294392", "add1");
         
-        p.addHobby(hob);        
+        p.addHobby(hob); 
         p.addPhone(ph);
         add.addPersons(p);
         ci.addAddress(add);

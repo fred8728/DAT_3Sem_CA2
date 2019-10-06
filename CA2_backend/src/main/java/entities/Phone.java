@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,16 +26,16 @@ public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PHONE_ID")
     private int id;
     @Column(name = "NUMBER")
     private int number;
     @Column(name = "DESCRIPTION")
     private String description;
-    @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")
     
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "PERSON_ID", referencedColumnName = "PHONE_ID")
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Person person;
 
     public Phone() {

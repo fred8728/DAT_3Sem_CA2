@@ -42,15 +42,15 @@ public class Person implements Serializable {
     @Column(name = "EMAIL")
     private String email;
     
-    @ManyToMany (cascade = CascadeType.PERSIST)
-    private List<Hobby> hobbyCollection;
+    @ManyToMany
+    private Collection<Hobby> hobbyCollection = new ArrayList();
     
     
-    @OneToMany(mappedBy = "person", cascade=CascadeType.PERSIST)
-    private List<Phone> phoneCollection;  
+    @OneToMany(mappedBy = "person" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Phone> phoneCollection = new ArrayList();  
     
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name="ADDRESS_ID")
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "PERSON_ID")
+    @ManyToOne (cascade = CascadeType.ALL)
     private Address address;
     
     public Person() {
@@ -96,7 +96,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public List<Hobby> getHobbyCollection() {
+    public Collection<Hobby> getHobbyCollection() {
         return hobbyCollection;
     }
 
@@ -104,7 +104,7 @@ public class Person implements Serializable {
         this.hobbyCollection.add(hob);
     }
 
-    public List<Phone> getPhoneCollection() {
+    public Collection<Phone> getPhoneCollection() {
         return phoneCollection;
     }
 

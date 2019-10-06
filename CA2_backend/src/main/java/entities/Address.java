@@ -13,6 +13,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,10 +44,11 @@ public class Address implements Serializable {
     @Column(name = "ADDITINALINFO")
     private String additionalinfo;
 
-    @OneToMany(mappedBy = "address")
-    private List<Person> persons;
+    @OneToMany(mappedBy = "address" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Person> persons = new ArrayList();
 
-    @ManyToOne
+    @JoinColumn(name = "CITYINFO_ID", referencedColumnName = "ADDRESS_ID")
+    @ManyToOne (cascade=CascadeType.PERSIST)
     private CityInfo cityInfo;
 
     public Address() {
@@ -83,7 +85,7 @@ public class Address implements Serializable {
         this.additionalinfo = additionalinfo;
     }
 
-    public List<Person> getPersons() {
+    public Collection<Person> getPersons() {
         return persons;
     }
 
@@ -99,9 +101,6 @@ public class Address implements Serializable {
         this.cityInfo = cityInfo;
     }
 
-
-    
-    
 
     @Override
     public String toString() {
