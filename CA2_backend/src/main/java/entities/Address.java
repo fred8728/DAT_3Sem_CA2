@@ -36,7 +36,7 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ADDRESS_ID")
     private Integer id;
     @Column(name = "STREET")
     private String street;

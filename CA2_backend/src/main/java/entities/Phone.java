@@ -26,7 +26,7 @@ public class Phone implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "PHONE_ID")
     private int id;
     @Column(name = "NUMBER")
     private int number;
