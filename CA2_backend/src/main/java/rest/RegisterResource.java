@@ -6,6 +6,15 @@ import dto.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.RegisterFacade;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -17,6 +26,30 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+@OpenAPIDefinition(
+            info = @Info(
+                    title = "Simple Register API",
+                    version = "0.1",
+                    description = "Simple API to get info about a registerd person.",        
+                    contact = @Contact( name = "Gruppe 9", email = "cph-ao141@cphbusiness.dk")
+            ),
+          tags = {
+                    @Tag(name = "register", description = "API related to Movie Info")
+              
+            },
+            servers = {
+                    @Server(
+                            description = "For Local host testing",
+                            url = "http://localhost:8080/CA2"
+                    )//,
+//                    @Server(
+//                            description = "Server API",
+//                            url = "http://mydroplet"
+//                    )
+                          
+            }
+    )
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
@@ -49,6 +82,14 @@ public class RegisterResource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+     @Operation(summary = "Get all persons in a list",
+            tags = {"persons"},
+            responses = {
+                     @ApiResponse(
+                     content = @Content(mediaType = "application/json",schema = @Schema(implementation = PersonDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "All persons"),                       
+                    @ApiResponse(responseCode = "400", description = "Persons not found")})
+
     public String getAllPersons() {
         List<PersonDTO> per = FACADE.getAllPersons();
         return GSON.toJson(per);
