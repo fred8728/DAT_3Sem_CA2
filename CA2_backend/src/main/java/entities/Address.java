@@ -91,13 +91,17 @@ public class Address implements Serializable {
         this.persons.add(person);
     }
 
-    public List<CityInfo> getCityInfo() {
+    public CityInfo getCityInfo() {
         return cityInfo;
     }
 
-    public void addCityInfo(CityInfo info) {
-        this.cityInfo.add(info);
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
     }
+
+
+    
+    
 
     @Override
     public String toString() {
