@@ -35,14 +35,14 @@ public class CityInfo implements Serializable {
     private int zipcode;
     @Column(name = "CITY")
     private String city;
-    
-    
-    @ManyToOne (cascade = CascadeType.PERSIST)
-    private Address address;
+
+    @OneToMany(mappedBy = "cityInfo")
+    private List<Address> address;
 
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
         this.city = city;
+        this.address = new ArrayList();
     }
 
     public CityInfo() {
@@ -72,19 +72,21 @@ public class CityInfo implements Serializable {
         this.city = city;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void addAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
-        address.getCityInfo().add(this);
+    }
+
+    public void addAddress(Address add) {
+        address.add(add);
     }
 
     @Override
     public String toString() {
         return "CityInfo{" + "id=" + id + ", zipcode=" + zipcode + ", city=" + city + '}';
     }
-
 
 }

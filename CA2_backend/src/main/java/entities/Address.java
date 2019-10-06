@@ -43,13 +43,11 @@ public class Address implements Serializable {
     @Column(name = "ADDITINALINFO")
     private String additionalinfo;
 
-    
     @OneToMany(mappedBy = "address")
     private List<Person> persons;
-    
-    
-    @OneToMany(mappedBy = "address")
-    private List <CityInfo> cityInfo;
+
+    @ManyToOne
+    private CityInfo cityInfo;
 
     public Address() {
     }
@@ -57,6 +55,8 @@ public class Address implements Serializable {
     public Address(String street, String additionalinfo) {
         this.street = street;
         this.additionalinfo = additionalinfo;
+        this.persons = new ArrayList();
+
     }
 
     public Integer getId() {
@@ -95,7 +95,7 @@ public class Address implements Serializable {
         return cityInfo;
     }
 
-    public void addCityInfo(CityInfo info){
+    public void addCityInfo(CityInfo info) {
         this.cityInfo.add(info);
     }
 
@@ -103,7 +103,5 @@ public class Address implements Serializable {
     public String toString() {
         return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + ", cityInfo=" + cityInfo + '}';
     }
-
-    
 
 }
