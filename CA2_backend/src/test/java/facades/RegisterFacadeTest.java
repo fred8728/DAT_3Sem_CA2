@@ -1,6 +1,6 @@
 package facades;
 
-
+import entities.Person;
 import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +15,14 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
+//@Disabled
 public class RegisterFacadeTest {
 
     private static EntityManagerFactory emf;
     private static RegisterFacade facade;
+    private Person p1 = new Person("Ahmed", "Nielsen", "Niels@hotmail.dk");
+    private Person p2 = new Person("Fred", "Mortensen Larsen", "kurt@hotsnail.dk");
+    private Person p3 = new Person("Emma", "ewbhqogh", "ex@gmail.com");
 
     public RegisterFacadeTest() {
     }
@@ -59,10 +62,12 @@ public class RegisterFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
             //em.persist(new Person("Some txt", "More text"));
             //em.persist(new Person("aaa", "bbb"));
-
+            em.persist(p1);
+            em.persist(p2);
+            em.persist(p3);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -74,11 +79,17 @@ public class RegisterFacadeTest {
 //        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
+
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
+    public void getPersonCountTest(){
+        int count = facade.getPersonCount();
+        assertEquals(3, count, "the amount should return as 3 persons"); 
     }
+    
+//    @Test
+//    public void getPersonAllTest(){
+//        
+//    }
     
 
 }

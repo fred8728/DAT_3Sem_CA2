@@ -6,22 +6,30 @@
 package dto;
 
 import entities.Person;
+import entities.Phone;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 
 /**
  *
  * @author fskn
  */
 public class PersonDTO {
-    
+
     private int id;
+    @Schema(required = true, example = "lise nielsen")
     private String name;
+    @Schema(required = true, example = "ringvejen")
     private String address;
-    private int phone;
+    @Schema(example = "[{1,21212121,\"a number of johnny\"}]")
+    private List<Phone> phone;
+    @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
     private String hobby;
 
     public PersonDTO(Person p) {
         this.name = p.getFirstName() + p.getLastName();
         this.address = p.getAddress().getStreet();
+        this.phone = p.getPhoneCollection();
     }
 
     public int getId() {
@@ -48,11 +56,11 @@ public class PersonDTO {
         this.address = address;
     }
 
-    public int getPhone() {
+    public List<Phone> getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(List <Phone> phone) {
         this.phone = phone;
     }
 
@@ -68,6 +76,5 @@ public class PersonDTO {
     public String toString() {
         return "PersonDTO{" + "id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", hobby=" + hobby + '}';
     }
-    
-    
+
 }
