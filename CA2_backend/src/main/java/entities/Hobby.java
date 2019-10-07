@@ -18,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +27,10 @@ import javax.persistence.Table;
  * @author emils
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Hobby.deleteAllRows", query = "DELETE from Hobby")
+    
+})
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
