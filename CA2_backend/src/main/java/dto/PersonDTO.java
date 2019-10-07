@@ -20,8 +20,8 @@ public class PersonDTO {
     @Schema(required = true, example = "lise nielsen")
     private String name;
     @Schema(required = true, example = "ringvejen")
-    private String address;
-    @Schema(example = "[{1,21212121,\"a number of johnny\"}]")
+//    private String address;
+//    @Schema(example = "[{1,21212121,\"a number of johnny\"}]")
     private List<Phone> phone;
     @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
     private String hobby;
@@ -48,13 +48,13 @@ public class PersonDTO {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+//    public String getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
 
     public List<Phone> getPhone() {
         return phone;
@@ -74,7 +74,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", hobby=" + hobby + '}';
+        return "PersonDTO{" + "id=" + id + ", name=" + name + /*", address=" + address +*/ ", phone=" + phone + ", hobby=" + hobby + '}';
     }
 
 }
