@@ -41,14 +41,14 @@ public class Person implements Serializable {
     @Column(name = "person_email")
     private String email;
     
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.PERSIST)
     private List<Hobby> hobbyCollection = new ArrayList();
     
     
     @OneToMany
     @JoinColumn
     private List<Phone> phoneCollection = new ArrayList(); 
-   
+    
     
     public Person() {
     }

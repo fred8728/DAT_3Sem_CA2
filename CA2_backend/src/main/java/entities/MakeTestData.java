@@ -24,8 +24,6 @@ public class MakeTestData {
         Phone ph = new Phone(12345678, "test");
         CityInfo ci = new CityInfo(1234, "lyngby");
         Hobby hob = new Hobby("100meter-kagebord", "når man tager en tur til joland");
-        Address add1 = new Address("Ishøjvej 50", "Ishøj");
-        Person p2 = new Person("Frank", "39294392", "add1");
 
         p.addHobby(hob);
         p.addPhone(ph);
@@ -47,21 +45,27 @@ public class MakeTestData {
         }
 
         RegisterFacade facade = RegisterFacade.getRegisterFacade(emf);
-//      System.out.println("Person with phone__________");
-//        System.out.println(facade.findPersonswithPhoneNumber(12345678));
+        System.out.println("Person with phone__________");
+        System.out.println(facade.getPersonByPhone(12345678));
         System.out.println("All persons_____________");
         System.out.println(facade.getAllPersons().toString());
         System.out.println("Person count_________");
         System.out.println(facade.getPersonCount());
-//        System.out.println("Add Person -- new person added to allPersons");
-//    //    Address add5 = new Address("Karolinevej 2", 4000, "SønderJylland");
-//        System.out.println(facade.addPerson("Katinka", 87654321, add, "Shopping"));
-//        System.out.println(facade.getAllPersons().toString());
-//        System.out.println("Delete person -- person is deleted from list");
-//        facade.deletePerson(4);
-//        System.out.println(facade.getAllPersons().toString());
-//        System.out.println("Get people from city");
-//        System.out.println(facade.getAllFromCity("Greve"));
+        System.out.println("Add Person -- new person added to allPersons");
+        Address add1 = new Address("Villavej 5", "Ishøj");
+        Person p1 = new Person("Cathrine", "Hansen", "cathrinehansen@hotmail.com");
+        Phone phone = new Phone(87654321, "My number");
+        CityInfo info = new CityInfo(2635, "Ishøj");
+        Hobby hobby = new Hobby("Shopping", "Køber unødvendigt");
+        System.out.println(facade.addPerson(p1, phone, add1, info, hobby));
+        System.out.println(facade.getAllPersons().toString());
+       System.out.println("Specific hobbyCount");
+        System.out.println(facade.getSpecificHobbyCount("Shopping"));
+        System.out.println("Get people with hobby");
+        System.out.println(facade.getPersonsWithSameHobby("Shopping"));
+        System.out.println("Delete Person");
+        facade.deletePerson(1);
+        System.out.println(facade.getAllPersons());
 //                
     }
 }

@@ -98,18 +98,18 @@ public class RegisterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByPhone(@PathParam("phone") int phone) {
-        Person p = FACADE.findPersonswithPhoneNumber(phone);
+        Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(p);
     }
     
-    
+    /*
     @Path("/get/all/{city}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByCity(@PathParam("city") String city) {
         List<Person> p = FACADE.getAllFromCity(city);
         return GSON.toJson(p);
-    }
+    }*/
     
 //    @Path("/get/all/{hobbie}")
 //    @GET
@@ -162,7 +162,7 @@ public class RegisterResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("{phone}")
     public String deletePerson(@PathParam("phone") int phone){
-        Person p = FACADE.findPersonswithPhoneNumber(phone);
+        Person p = FACADE.getPersonByPhone(phone);
         int id = p.getId();
         Person p1 = FACADE.deletePerson(id);
         return GSON.toJson(p1);

@@ -2,7 +2,10 @@ package facades;
 
 import dto.PersonDTO;
 import entities.Address;
+import entities.CityInfo;
+import entities.Hobby;
 import entities.Person;
+import entities.Phone;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,8 +43,6 @@ public class RegisterFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
-    
     
     //Virker - tjekket af simone d. 07/10-19
     public int getPersonCount() {
@@ -67,93 +68,87 @@ public class RegisterFacade {
         }   
     }
     
-    //skal laves
-    public int getCountOfHobby() {
+    //Virker - tjekket af simone d. 07/10-19
+    public Person getPersonByPhone(int phone) {
         EntityManager em = emf.createEntityManager();
-        try {
-           
-            return 0;
-        } finally {
-            em.close();
-        }
-    }
-
-    
-    //Virker - anvend namedquery i person klassen
-    public Person findPersonswithPhoneNumber(int Phone) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            return (Person) em.createQuery("SELECT s FROM Person s WHERE s.phone = :phone", Person.class)
-                    .setParameter("phone", Phone).getSingleResult();
+        try { 
+            Person p =  em.createQuery("SELECT p FROM Person p JOIN p.phoneCollection ph WHERE ph.number=:number", Person.class)
+                    .setParameter("number", phone).getSingleResult();
+            return p;
         } finally {
             em.close();
         }
     }
     
-    //Virker
-    public List<Person> getAllFromCity(String city){
+    //Virker - tjekket a simone d. 07/10-19
+    public List<Person> getPersonsWithSameHobby(String hobby){
         EntityManager em = emf.createEntityManager();
-        try{
-            Query query = em.createQuery("SELECT p FROM Person p JOIN p.address a where a.city=:city")
-                    .setParameter("city", city);
+        try{ 
+            Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbyCollection hobby where hobby.name=:name",Person.class)
+                    .setParameter("name",hobby);
             return query.getResultList(); 
         }finally{
             em.close();
         }
     }
 
-    /* public List<Person> findAllPersonswithHobbie(String hobbie) {
+    //Virker - tjekket a simone d. 07/10-19
+    public int getSpecificHobbyCount(String hobby){
         EntityManager em = emf.createEntityManager();
         try {
-            em.getTransaction().begin();     //  SELECT e FROM Employee e JOIN e.projects p JOIN e.projects p2 WHERE p.name = :p1 and p2.name = :p2
-            TypedQuery query = em.createQuery("SELECT s FROM Person s JOIN s.ID a JOIN s.ID a2 WHERE a.Person_ID = :hobbie and a2.name = :p2", Person.class);
-            query.setParameter("hobbie", hobbie);
-            em.getTransaction().commit();
-            return query.getResultList();
+            Query query = em.createQuery("SELECT count(h) FROM Hobby h WHERE h.name=:name ",Hobby.class)
+                    .setParameter("name", hobby);
+            return  Integer.parseInt(query.getSingleResult().toString());
         } finally {
             em.close();
         }
     }
     
-    
-     */
-   
-    
-
-    /*
-    //Virker
-    public Person addPerson(String name, int phone, Address add, String hobby) {
-        Person p = new Person (name, phone, add);
-        p.addHobbies(hobby);
+    //Virker - lavet af Simone d. 07/10-19
+    public Person addPerson(Person p, Phone phone, Address add, CityInfo ci, Hobby hobby) {
+        p.addHobby(hobby);
+        p.addPhone(phone);
+        add.addPersons(p);
+        ci.addAddress(add);
+        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(p);
+            em.persist(phone);
+            em.persist(add);
+            em.persist(ci);
             em.getTransaction().commit();
             return p;
         } finally {
             em.close();
         }
-    }*/
+    }
     
-    //Virker ikke 100 % - ikke færdig 
+    //Virker ikke - simone er i gang
     public Person deletePerson(int id) {
         EntityManager em = emf.createEntityManager();
         Person p = em.find(Person.class, id);
-        //Address add = p.getAddress();
-        Person p1 = new Person();
+        Address add = em.find(Address.class, p);
+        CityInfo ci = new CityInfo();
+        Phone phone = new Phone();
+        Hobby hobby = new Hobby();
+        hobby.getPersons().remove(p);
+        
+        p.getHobbyCollection().remove(p);
+        p.getPhoneCollection().remove(p);
+        
+        add.getPersons().remove(p);
+        ci.getAddress().remove(p);
         try {
             em.getTransaction().begin();
             em.remove(p);
-            //em.remove(add);
+            em.remove(add);
+            em.remove(ci);
             em.getTransaction().commit();
         }finally {
             em.close();
         }
         return p;
     }
-    
-    
-    
 }
