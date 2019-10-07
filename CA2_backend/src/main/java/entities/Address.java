@@ -7,7 +7,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,7 +44,7 @@ public class Address implements Serializable {
     private String additionalinfo;
 
     @OneToMany(mappedBy = "address" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Person> persons = new ArrayList();
+    private List<Person> persons = new ArrayList();
 
     @JoinColumn(name = "CITYINFO_ID", referencedColumnName = "ADDRESS_ID")
     @ManyToOne (cascade=CascadeType.PERSIST)
@@ -85,7 +84,7 @@ public class Address implements Serializable {
         this.additionalinfo = additionalinfo;
     }
 
-    public Collection<Person> getPersons() {
+    public List<Person> getPersons() {
         return persons;
     }
 

@@ -41,7 +41,7 @@ public class Hobby implements Serializable {
         @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
 
     @ManyToMany(mappedBy = "hobbyCollection")
-    private Collection<Person> personCollection = new ArrayList();
+    private List<Person> personCollection = new ArrayList();
 
     public Hobby() {
     }
@@ -75,7 +75,7 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public Collection<Person> getPersons() {
+    public List<Person> getPersons() {
         return personCollection;
     }
 

@@ -2,7 +2,6 @@ package  entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,11 +42,11 @@ public class Person implements Serializable {
     private String email;
     
     @ManyToMany
-    private Collection<Hobby> hobbyCollection = new ArrayList();
+    private List<Hobby> hobbyCollection = new ArrayList();
     
     
     @OneToMany(mappedBy = "person" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<Phone> phoneCollection = new ArrayList();  
+    private List<Phone> phoneCollection = new ArrayList();  
     
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "PERSON_ID")
     @ManyToOne (cascade = CascadeType.ALL)
@@ -96,7 +95,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Collection<Hobby> getHobbyCollection() {
+    public List<Hobby> getHobbyCollection() {
         return hobbyCollection;
     }
 
@@ -104,7 +103,7 @@ public class Person implements Serializable {
         this.hobbyCollection.add(hob);
     }
 
-    public Collection<Phone> getPhoneCollection() {
+    public List<Phone> getPhoneCollection() {
         return phoneCollection;
     }
 
