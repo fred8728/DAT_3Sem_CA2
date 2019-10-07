@@ -8,11 +8,8 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
@@ -36,20 +32,18 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ADDRESS_ID")
+    @Column(name = "address_id")
     private Integer id;
-    @Column(name = "STREET")
+    @Column(name = "street")
     private String street;
-    @Column(name = "ADDITINALINFO")
+    @Column(name = "additional_info")
     private String additionalinfo;
 
-    @OneToMany(mappedBy = "address" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Person> persons = new ArrayList();
-
-    @JoinColumn(name = "CITYINFO_ID", referencedColumnName = "ADDRESS_ID")
-    @ManyToOne (cascade=CascadeType.PERSIST)
-    private CityInfo cityInfo;
-
+    
+    @OneToMany
+    @JoinColumn
+    private List <Person> persons = new ArrayList();
+    
     public Address() {
     }
 
@@ -92,18 +86,9 @@ public class Address implements Serializable {
         this.persons.add(person);
     }
 
-    public CityInfo getCityInfo() {
-        return cityInfo;
-    }
-
-    public void setCityInfo(CityInfo cityInfo) {
-        this.cityInfo = cityInfo;
-    }
-
-
     @Override
     public String toString() {
-        return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + ", cityInfo=" + cityInfo + '}';
+        return "Address{" + "id=" + id + ", street=" + street + ", additionalinfo=" + additionalinfo + ", persons=" + persons + '}';
     }
 
 }

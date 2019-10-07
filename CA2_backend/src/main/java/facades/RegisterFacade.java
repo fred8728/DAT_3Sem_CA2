@@ -41,7 +41,9 @@ public class RegisterFacade {
         return emf.createEntityManager();
     }
 
-    //Virker - Get person count
+    
+    
+    //Virker - tjekket af simone d. 07/10-19
     public int getPersonCount() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -52,18 +54,7 @@ public class RegisterFacade {
         }
     }
        
-    //skal laves
-    public int getCountOfHobby() {
-        EntityManager em = emf.createEntityManager();
-        try {
-           
-            return 0;
-        } finally {
-            em.close();
-        }
-    }
-
-    //Virker - viser id, navn og phone
+    //Virker - Tjekket af simone d. 07/10-19
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -74,6 +65,17 @@ public class RegisterFacade {
         } finally {
             em.close();
         }   
+    }
+    
+    //skal laves
+    public int getCountOfHobby() {
+        EntityManager em = emf.createEntityManager();
+        try {
+           
+            return 0;
+        } finally {
+            em.close();
+        }
     }
 
     
@@ -139,12 +141,12 @@ public class RegisterFacade {
     public Person deletePerson(int id) {
         EntityManager em = emf.createEntityManager();
         Person p = em.find(Person.class, id);
-        Address add = p.getAddress();
+        //Address add = p.getAddress();
         Person p1 = new Person();
         try {
             em.getTransaction().begin();
             em.remove(p);
-            em.remove(add);
+            //em.remove(add);
             em.getTransaction().commit();
         }finally {
             em.close();
