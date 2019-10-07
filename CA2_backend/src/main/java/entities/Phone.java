@@ -27,17 +27,14 @@ public class Phone implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PHONE_ID")
+    @Column(name = "phone_id")
     private int id;
-    @Column(name = "NUMBER")
+    @Column(name = "phone_number")
     private int number;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "phone_description")
     private String description;
     
-    @JoinColumn(name = "PERSON_ID", referencedColumnName = "PHONE_ID")
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    private Person person;
-
+    
     public Phone() {
     }
 
@@ -70,21 +67,12 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void addPerson(Person person) {
-        this.person = person;
-        person.getPhoneCollection().add(this);
-    }
-
-    
-
     @Override
     public String toString() {
-        return "Phone{" + "id=" + id + ", number=" + number + ", description=" + description + ", person=" + person + '}';
+        return "Phone{" + "id=" + id + ", number=" + number + ", description=" + description + '}';
     }
+
+   
 
     
 

@@ -32,25 +32,23 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PERSON_ID")
+    @Column(name = "person_id")
     private int id;
-    @Column(name = "FIRSTNAME")
+    @Column(name = "person_firstname")
     private String firstName;
-    @Column(name = "LASTNAME")
+    @Column(name = "person_lastname")
     private String lastName;
-    @Column(name = "EMAIL")
+    @Column(name = "person_email")
     private String email;
     
     @ManyToMany
     private List<Hobby> hobbyCollection = new ArrayList();
     
     
-    @OneToMany(mappedBy = "person" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Phone> phoneCollection = new ArrayList();  
-    
-    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "PERSON_ID")
-    @ManyToOne (cascade = CascadeType.ALL)
-    private Address address;
+    @OneToMany
+    @JoinColumn
+    private List<Phone> phoneCollection = new ArrayList(); 
+   
     
     public Person() {
     }
@@ -111,14 +109,7 @@ public class Person implements Serializable {
         this.phoneCollection.add(phone);
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void addAddress(Address address) {
-        this.address = address;
-        address.getPersons().add(this);
-    }
+    
 
     @Override
     public String toString() {

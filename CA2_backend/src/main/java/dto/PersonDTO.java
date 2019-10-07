@@ -28,7 +28,7 @@ public class PersonDTO {
 
     public PersonDTO(Person p) {
         this.name = p.getFirstName() + p.getLastName();
-        this.address = p.getAddress().getStreet();
+        //this.address = p.getAddress().getStreet();
         this.phone = p.getPhoneCollection();
     }
 

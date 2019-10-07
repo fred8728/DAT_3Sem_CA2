@@ -89,7 +89,6 @@ public class RegisterResource {
                      content = @Content(mediaType = "application/json",schema = @Schema(implementation = PersonDTO.class))),
                     @ApiResponse(responseCode = "200", description = "All persons"),                       
                     @ApiResponse(responseCode = "400", description = "Persons not found")})
-
     public String getAllPersons() {
         List<PersonDTO> per = FACADE.getAllPersons();
         return GSON.toJson(per);

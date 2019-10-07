@@ -30,15 +30,15 @@ public class Hobby implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HOBBY_ID")
+    @Column(name = "hobby_id")
     private Long id;
-    @Column(name = "NAME")
+    @Column(name = "hobby_name")
     private String name;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "hobby_description")
     private String description;
-    @JoinTable(name = "HOBBY_PERSON", joinColumns = {
-        @JoinColumn(name = "HOBBY_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")})
+    @JoinTable(name = "hobby_person", joinColumns = {
+        @JoinColumn(name = "hobby_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "person_id", referencedColumnName = "id")})
 
     @ManyToMany(mappedBy = "hobbyCollection")
     private List<Person> personCollection = new ArrayList();

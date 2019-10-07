@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,15 +29,16 @@ public class CityInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CITYINFO_ID")
+    @Column(name = "city_info_id")
     private Long id;
-    @Column(name = "ZIPCODE")
+    @Column(name = "zipcode")
     private int zipcode;
-    @Column(name = "CITY")
+    @Column(name = "city")
     private String city;
 
-    @OneToMany(mappedBy = "cityInfo")
-    private List<Address> address;
+    @OneToMany
+    @JoinColumn
+    private List<Address> address = new ArrayList();
 
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
