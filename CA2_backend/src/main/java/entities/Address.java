@@ -40,7 +40,7 @@ public class Address implements Serializable {
     private String additionalinfo;
 
     
-    @OneToMany
+    @OneToMany  
     @JoinColumn
     private List <Person> persons = new ArrayList();
     

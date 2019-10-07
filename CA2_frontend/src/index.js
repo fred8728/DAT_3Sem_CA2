@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import jokes from "./jokes";
+ import 'bootstrap/dist/css/bootstrap.css'
+import jokes from "./jokes"; 
 
 document.getElementById("but3").addEventListener("click", function(){
     document.getElementById("div2").innerhtml ="<p> Yeet</p>"  ;})
