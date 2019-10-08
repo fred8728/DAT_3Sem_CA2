@@ -28,21 +28,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @OpenAPIDefinition(
-        info = @Info(
-                title = "Simple Register API",
-                version = "0.1",
-                description = "Simple API to get info about a registerd person.",
-                contact = @Contact(name = "Gruppe 9", email = "cph-ao141@cphbusiness.dk")
-        ),
-        tags = {
-            @Tag(name = "register", description = "API related to Movie Info")
 
-        },
-        servers = {
-            @Server(
-                    description = "For Local host testing",
-                    url = "http://localhost:8080/CA2"
-            )//,
+            info = @Info(
+                    title = "Simple Register API",
+                    version = "0.1",
+                    description = "Simple API to get info about a registerd person.",        
+                    contact = @Contact( name = "Gruppe 9", email = "cph-ao141@cphbusiness.dk")
+            ),
+          tags = {
+                    @Tag(name = "register", description = "API related to Movie Info")
+              
+            },
+            servers = {
+                    @Server(
+                            description = "For Local host testing",
+                            url = "http://localhost:8080/startcode"
+                    )//,
+
 //                    @Server(
 //                            description = "Server API",
 //                            url = "http://mydroplet"
@@ -109,6 +111,14 @@ public class RegisterResource {
         return GSON.toJson(p);
     }
 
+    @Path("/insertdata")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String insertData() {
+
+        FACADE.insertData();
+        return "{\"msg\":\"Done\"}";
+    }
     
 //    @Path("/get/all/{city}")
 //    @GET
