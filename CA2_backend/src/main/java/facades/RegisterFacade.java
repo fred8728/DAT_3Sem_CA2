@@ -59,7 +59,6 @@ public class RegisterFacade {
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
-
             List <PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
             return getAll;
 
