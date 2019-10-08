@@ -116,6 +116,7 @@ public class RegisterFacade {
             em.persist(phone);
             em.persist(add);
             em.persist(ci);
+            em.persist(hobby);
             em.getTransaction().commit();
             return p;
         } finally {
