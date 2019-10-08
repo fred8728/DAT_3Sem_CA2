@@ -58,18 +58,19 @@ public class RegisterFacade {
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
-            List <PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+           //    List<Person> personList = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            
+            List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
             return getAll;
 
         } finally {
             em.close();
-        }   
+        }
     }
-    
+
     public List<PersonDTO> getAllPersonsByCity(String city) {
         EntityManager em = emf.createEntityManager();
         try {
-
 
             List<PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
             return getAll;
@@ -92,7 +93,6 @@ public class RegisterFacade {
     }
 
     //Virker - tjekket a simone d. 07/10-19
-
     public List<Person> getPersonsWithSameHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -142,7 +142,7 @@ public class RegisterFacade {
         Person p = em.find(Person.class, personId);
         Address add = em.find(Address.class, p.getAddress().getId());
         CityInfo ci = em.find(CityInfo.class, add.getCityInfo().getId());
-      //  hobby.getPersons().remove(p);
+        //  hobby.getPersons().remove(p);
 
         /* p.getHobbyCollection().remove(p);
         p.getPhoneCollection().remove(p);
@@ -162,7 +162,7 @@ public class RegisterFacade {
                 Hobby hobby = em.find(Hobby.class, p.getHobbyCollection().get(i).getId());
                 em.remove(hobby);
             }
-            
+
             em.getTransaction().commit();
         } finally {
             em.close();

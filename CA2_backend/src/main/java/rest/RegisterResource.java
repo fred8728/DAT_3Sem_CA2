@@ -94,7 +94,7 @@ public class RegisterResource {
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
-                @ApiResponse(responseCode = "200", description = "return All persons"),
+                @ApiResponse(responseCode =  "200", description = "return All persons"),
                 @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getAllPersons() {
         List<PersonDTO> per = FACADE.getAllPersons();
@@ -116,7 +116,8 @@ public class RegisterResource {
 //    public String getPersonByCity(@PathParam("city") String city) {
 //        List<Person> p = FACADE.getAllPersonsByCity(city);
 //        return GSON.toJson(p);
-//    }
+//    } 
+    
     @Path("/get/all/{hobbie}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
