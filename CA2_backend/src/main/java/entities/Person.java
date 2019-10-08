@@ -45,12 +45,14 @@ public class Person implements Serializable {
     private List<Hobby> hobbyCollection = new ArrayList();
     
     
-    @OneToMany
-    @JoinColumn
+
+    @OneToMany(mappedBy = "person")
     private List<Phone> phoneCollection = new ArrayList(); 
     
-//    @ManyToOne
-//    private Address adress;
+
+    @ManyToOne
+    private Address address;
+
     
     public Person() {
     }
@@ -109,6 +111,16 @@ public class Person implements Serializable {
 
     public void addPhone(Phone phone) {
         this.phoneCollection.add(phone);
+        phone.setPerson(this);
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+    
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     

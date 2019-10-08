@@ -37,7 +37,7 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hobby_id")
-    private Long id;
+    private int id;
     @Column(name = "hobby_name")
     private String name;
     @Column(name = "hobby_description")
@@ -57,11 +57,11 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

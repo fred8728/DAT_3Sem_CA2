@@ -27,7 +27,7 @@ public class MakeTestData {
 
         p.addHobby(hob);
         p.addPhone(ph);
-        add.addPersons(p);
+        add.addPerson(p);
         ci.addAddress(add);
 
         try {
@@ -64,7 +64,8 @@ public class MakeTestData {
         System.out.println("Get people with hobby");
         System.out.println(facade.getAllPersonsWithHobby("Shopping"));
         System.out.println("Delete Person");
-        //facade.deletePerson(1);
+
+      //  facade.deletePerson(1,1,1);
         System.out.println(facade.getAllPersons());
         System.out.println(facade.getPersonByPhone(12345678));
 //                

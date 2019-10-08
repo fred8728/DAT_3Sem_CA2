@@ -40,9 +40,10 @@ public class Address implements Serializable {
     private String additionalinfo;
 
     
-    @OneToMany  
-    @JoinColumn
+    @OneToMany(mappedBy = "address")
     private List <Person> persons = new ArrayList();
+    @ManyToOne
+    private CityInfo cityInfo;
     
     public Address() {
     }
@@ -82,9 +83,20 @@ public class Address implements Serializable {
         return persons;
     }
 
-    public void addPersons(Person person) {
+    public void addPerson(Person person) {
         this.persons.add(person);
+        person.setAddress(this);
     }
+
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+    }
+    
+    
 
     @Override
     public String toString() {
