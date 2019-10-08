@@ -172,8 +172,8 @@ public class RegisterFacadeTest {
 
     @Test
     public void getPersonWithSameHobby() {
-        List<Person> p = facade.getAllPersonsWithHobby(hobby1.getName());
-        List<Person> p1 = facade.getAllPersonsWithHobby(hobby3.getName());
+        List<Person> p = facade.getPersonsWithSameHobby(hobby1.getName());
+        List<Person> p1 = facade.getPersonsWithSameHobby(hobby3.getName());
 
         assertEquals(p.get(0).getEmail(), "Niels@hotmail.dk");
         assertEquals(p1.get(0).getLastName(), "Hansen");

@@ -121,7 +121,7 @@ public class RegisterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByCity(@PathParam("hobbie") String hobbie) {
-        List<Person> p = FACADE.getAllPersonsWithHobby(hobbie);
+        List<Person> p = FACADE.getPersonsWithSameHobby(hobbie);
         return GSON.toJson(p);
     }
     
