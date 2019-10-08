@@ -108,9 +108,8 @@ public class RegisterFacade {
     public Person addPerson(Person p, Phone phone, Address add, CityInfo ci, Hobby hobby) {
         p.addHobby(hobby);
         p.addPhone(phone);
-        add.addPersons(p);
+        add.addPerson(p);
         ci.addAddress(add);
-        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -126,13 +125,13 @@ public class RegisterFacade {
     }
     
     //Virker ikke - simone er i gang
-    public Person deletePerson(int id) {
+    public Person deletePerson(int personId, int addId, int ciID) {
         EntityManager em = emf.createEntityManager();
-        Person p = em.find(Person.class, id);
-        Address add = em.find(Address.class, p);
-        CityInfo ci = new CityInfo();
-        Phone phone = new Phone();
-        Hobby hobby = new Hobby();
+        Person p = em.find(Person.class, personId);
+        Address add = em.find(Address.class, addId);
+        CityInfo ci = em.find(CityInfo.class, addId);
+        Phone phone = em.find(Phone.class, p.getId());
+        Hobby hobby = em.find(Hobby.class, p.getId());
         hobby.getPersons().remove(p);
         
         p.getHobbyCollection().remove(p);
@@ -145,10 +144,14 @@ public class RegisterFacade {
             em.remove(p);
             em.remove(add);
             em.remove(ci);
+            em.remove(phone);
+            em.remove(hobby);
             em.getTransaction().commit();
         }finally {
             em.close();
         }
         return p;
     }
+    
+    
 }

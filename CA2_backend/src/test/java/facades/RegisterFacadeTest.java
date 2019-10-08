@@ -91,10 +91,10 @@ public class RegisterFacadeTest {
         p2.addPhone(phone2);
         p3.addPhone(phone3);
         p4.addPhone(phone4);
-        add1.addPersons(p1);
-        add2.addPersons(p2);
-        add3.addPersons(p3);
-        add3.addPersons(p4);
+        add1.addPerson(p1);
+        add2.addPerson(p2);
+        add3.addPerson(p3);
+        add3.addPerson(p4);
         cinfo1.addAddress(add1);
         cinfo2.addAddress(add2);
         cinfo3.addAddress(add3);
