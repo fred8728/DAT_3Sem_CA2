@@ -17,7 +17,6 @@ import javax.persistence.TypedQuery;
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-
 public class RegisterFacade {
 
     private static RegisterFacade instance;
@@ -43,67 +42,67 @@ public class RegisterFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     //Virker - tjekket af simone d. 07/10-19
     public int getPersonCount() {
         EntityManager em = emf.createEntityManager();
         try {
             Query query = em.createNamedQuery("Person.count");
-            return  Integer.parseInt(query.getSingleResult().toString());
+            return Integer.parseInt(query.getSingleResult().toString());
         } finally {
             em.close();
         }
     }
-       
+
     //Virker - Tjekket af simone d. 07/10-19
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
 
-            List <PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
+            List<PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
             return getAll;
 
         } finally {
             em.close();
-        }   
+        }
     }
-    
+
     //Virker - tjekket af simone d. 07/10-19
     public Person getPersonByPhone(int phone) {
         EntityManager em = emf.createEntityManager();
-        try { 
-            Person p =  em.createQuery("SELECT p FROM Person p JOIN p.phoneCollection ph WHERE ph.number=:number", Person.class)
+        try {
+            Person p = em.createQuery("SELECT p FROM Person p JOIN p.phoneCollection ph WHERE ph.number=:number", Person.class)
                     .setParameter("number", phone).getSingleResult();
             return p;
         } finally {
             em.close();
         }
     }
-    
+
     //Virker - tjekket a simone d. 07/10-19
-    public List<Person> getPersonsWithSameHobby(String hobby){
+    public List<Person> getPersonsWithSameHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
-        try{ 
-            Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbyCollection hobby where hobby.name=:name",Person.class)
-                    .setParameter("name",hobby);
-            return query.getResultList(); 
-        }finally{
+        try {
+            Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbyCollection hobby where hobby.name=:name", Person.class)
+                    .setParameter("name", hobby);
+            return query.getResultList();
+        } finally {
             em.close();
         }
     }
 
     //Virker - tjekket a simone d. 07/10-19
-    public int getSpecificHobbyCount(String hobby){
+    public int getSpecificHobbyCount(String hobby) {
         EntityManager em = emf.createEntityManager();
         try {
-            Query query = em.createQuery("SELECT count(h) FROM Hobby h WHERE h.name=:name ",Hobby.class)
+            Query query = em.createQuery("SELECT count(h) FROM Hobby h WHERE h.name=:name ", Hobby.class)
                     .setParameter("name", hobby);
-            return  Integer.parseInt(query.getSingleResult().toString());
+            return Integer.parseInt(query.getSingleResult().toString());
         } finally {
             em.close();
         }
     }
-    
+
     //Virker - lavet af Simone d. 07/10-19
     public Person addPerson(Person p, Phone phone, Address add, CityInfo ci, Hobby hobby) {
         p.addHobby(hobby);
@@ -123,35 +122,38 @@ public class RegisterFacade {
             em.close();
         }
     }
-    
+
     //Virker ikke - simone er i gang
-    public Person deletePerson(int personId, int addId, int ciID) {
+    public Person deletePerson(int personId) {
         EntityManager em = emf.createEntityManager();
         Person p = em.find(Person.class, personId);
-        Address add = em.find(Address.class, addId);
-        CityInfo ci = em.find(CityInfo.class, addId);
-        Phone phone = em.find(Phone.class, p.getId());
-        Hobby hobby = em.find(Hobby.class, p.getId());
-        hobby.getPersons().remove(p);
-        
-        p.getHobbyCollection().remove(p);
+        Address add = em.find(Address.class, p.getAddress().getId());
+        CityInfo ci = em.find(CityInfo.class, add.getCityInfo().getId());
+      //  hobby.getPersons().remove(p);
+
+        /* p.getHobbyCollection().remove(p);
         p.getPhoneCollection().remove(p);
         
         add.getPersons().remove(p);
         ci.getAddress().remove(p);
-        try {
+         */ try {
             em.getTransaction().begin();
-            em.remove(p);
-            em.remove(add);
             em.remove(ci);
-            em.remove(phone);
-            em.remove(hobby);
+            em.remove(add);
+            em.remove(p);
+            for (int i = 0; i < p.getPhoneCollection().size(); i++) {
+                Phone phone = em.find(Phone.class, p.getPhoneCollection().get(i).getId());
+                em.remove(phone);
+            }
+            for (int i = 0; i < p.getHobbyCollection().size(); i++) {
+                Hobby hobby = em.find(Hobby.class, p.getHobbyCollection().get(i).getId());
+                em.remove(hobby);
+            }
+            
             em.getTransaction().commit();
-        }finally {
+        } finally {
             em.close();
         }
         return p;
     }
-    
-    
 }

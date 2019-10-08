@@ -59,12 +59,12 @@ public class MakeTestData {
         Hobby hobby = new Hobby("Shopping", "Køber unødvendigt");
         System.out.println(facade.addPerson(p1, phone, add1, info, hobby));
         System.out.println(facade.getAllPersons().toString());
-       System.out.println("Specific hobbyCount");
+        System.out.println("Specific hobbyCount");
         System.out.println(facade.getSpecificHobbyCount("Shopping"));
         System.out.println("Get people with hobby");
         System.out.println(facade.getPersonsWithSameHobby("Shopping"));
         System.out.println("Delete Person");
-      //  facade.deletePerson(1,1,1);
+        facade.deletePerson(1);
         System.out.println(facade.getAllPersons());
 //                
     }
