@@ -82,7 +82,7 @@ public class RegisterFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-
+        
         p1.addHobby(hobby1);
         p2.addHobby(hobby2);
         p3.addHobby(hobby3);
@@ -194,10 +194,15 @@ public class RegisterFacadeTest {
         CityInfo cinfo = new CityInfo(12345, "New York");
         Hobby hobby = new Hobby("Karate", "Slag og spark");
         Person p1 = facade.addPerson(p, phone, add, cinfo, hobby);
-        
+
         assertEquals(facade.getPersonCount(), 5);
         assertEquals(p1.getFirstName(), "Simone");
-        assertEquals(add.getPersons().get(0).getLastName(), "Sejesen");     
+        assertEquals(add.getPersons().get(0).getLastName(), "Sejesen");
     }
 
+    @Test
+    public void deletePerson() {
+        Person p = facade.deletePerson(p1.getId());
+        assertEquals(facade.getPersonCount(), 3);
+    }
 }

@@ -22,7 +22,6 @@ import javax.ws.rs.ext.Provider;
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
   
 static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     @Override
     public Response toResponse(Throwable ex) {
         Response.StatusType type = getStatusType(ex);
@@ -39,7 +38,6 @@ static Gson gson = new GsonBuilder().setPrettyPrinting().create();
             return ((WebApplicationException) ex).getResponse().getStatusInfo();
         }
         return Response.Status.INTERNAL_SERVER_ERROR;
-
     }
 
 }
