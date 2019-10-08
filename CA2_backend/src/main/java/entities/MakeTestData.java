@@ -66,6 +66,7 @@ public class MakeTestData {
         System.out.println("Delete Person");
         facade.deletePerson(1);
         System.out.println(facade.getAllPersons());
-//                
+        facade.editPerson(2, "brunhilde");
+        System.out.println(facade.getAllPersons());
     }
 }

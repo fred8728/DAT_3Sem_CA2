@@ -41,7 +41,7 @@ import javax.ws.rs.core.MediaType;
             servers = {
                     @Server(
                             description = "For Local host testing",
-                            url = "http://localhost:8080/CA2"
+                            url = "http://localhost:8080/startcode"
                     )//,
 //                    @Server(
 //                            description = "Server API",
@@ -100,6 +100,14 @@ public class RegisterResource {
     public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(p);
+    }
+    @Path("/insertdata")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String insertData() {
+
+        FACADE.insertData();
+        return "{\"msg\":\"Done\"}";
     }
     
     /*
