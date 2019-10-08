@@ -39,6 +39,8 @@ public class Phone implements Serializable {
     private int number;
     @Column(name = "phone_description")
     private String description;
+    @ManyToOne
+    private Person person;
     
     
     public Phone() {
@@ -72,6 +74,16 @@ public class Phone implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    
+    
 
     @Override
     public String toString() {
