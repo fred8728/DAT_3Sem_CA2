@@ -156,4 +156,29 @@ public class RegisterFacade {
         }
         return p;
     }
+    
+    public void insertData(){
+            EntityManager em = emf.createEntityManager();
+            Address add1 = new Address("Villavej 5", "Ishøj");
+            Address add2 = new Address("Villavej 7", "Farum");
+        Person p1 = new Person("Cathrine", "Hansen", "cathrinehansen@hotmail.com");
+        Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
+        Phone phone1 = new Phone(87654321, "My number");
+        Phone phone2 = new Phone(12345678, "yeet");
+        CityInfo info = new CityInfo(2635, "Ishøj");
+        CityInfo info1 = new CityInfo(3520, "Farum");
+        Hobby hobby = new Hobby("Shopping", "Køber unødvendigt");
+        
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.persist(addPerson(p1, phone1, add1, info, hobby));
+            em.persist(addPerson(p2, phone2, add2, info1,hobby));
+            
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }

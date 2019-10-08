@@ -101,6 +101,14 @@ public class RegisterResource {
         Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(p);
     }
+    @Path("/insertdata")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String insertData() {
+
+        FACADE.insertData();
+        return "{\"msg\":\"Done\"}";
+    }
     
     /*
     @Path("/get/all/{city}")
