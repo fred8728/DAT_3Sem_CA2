@@ -100,6 +100,11 @@ public class RegisterFacadeTest {
         cinfo3.addAddress(add3);
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Hobby.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
             em.persist(p1);
             em.persist(p2);
             em.persist(p3);
@@ -130,10 +135,10 @@ public class RegisterFacadeTest {
     }
 
     //Need to insert some kind of delete in the setup method (tried but didnt work)
-    /*@Test
+    @Test
     public void getPersonCountTest() {
         assertEquals(4, facade.getPersonCount());
-    }*/
+    }
 
     @Test
     public void checkListsAreEqual() {
@@ -148,9 +153,51 @@ public class RegisterFacadeTest {
         persons.add(p2);
         persons.add(p3);
         persons.add(p4);
-        
+
         assertNotNull(persons);
         assertNotNull(facade.getAllPersons());
         assertEquals(persons.size(), facade.getAllPersons().size());
     }
+
+    @Test
+    public void getPersonByPhoneTest() {
+        Person p = facade.getPersonByPhone(phone1.getNumber());
+        assertEquals(p.getFirstName(), "Ahmed");
+        assertEquals(p.getEmail(), "Niels@hotmail.dk");
+
+        Person p1 = facade.getPersonByPhone(phone3.getNumber());
+        assertEquals(p1.getLastName(), "Hansen");
+        assertEquals(p1.getEmail(), "ex@gmail.com");
+    }
+
+    @Test
+    public void getPersonWithSameHobby() {
+        List<Person> p = facade.getPersonsWithSameHobby(hobby1.getName());
+        List<Person> p1 = facade.getPersonsWithSameHobby(hobby3.getName());
+
+        assertEquals(p.get(0).getEmail(), "Niels@hotmail.dk");
+        assertEquals(p1.get(0).getLastName(), "Hansen");
+        assertEquals(p1.get(0).getFirstName(), "Emma");
+    }
+
+    @Test
+    public void countSpecificHobby() {
+        int count = facade.getSpecificHobbyCount("Game");
+        assertEquals(1, count);
+    }
+
+    @Test
+    public void addPersonTest() {
+        Person p = new Person("Simone", "Sejesen", "simonesej@hotmail.com");
+        Address add = new Address("Ønskeøen", "New York");
+        Phone phone = new Phone(67899876, "Private number");
+        CityInfo cinfo = new CityInfo(12345, "New York");
+        Hobby hobby = new Hobby("Karate", "Slag og spark");
+        Person p1 = facade.addPerson(p, phone, add, cinfo, hobby);
+        
+        assertEquals(facade.getPersonCount(), 5);
+        assertEquals(p1.getFirstName(), "Simone");
+        assertEquals(add.getPersons().get(0).getLastName(), "Sejesen");     
+    }
+
 }
