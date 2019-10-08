@@ -58,6 +58,19 @@ public class RegisterFacade {
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
+           //    List<Person> personList = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            
+            List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            return getAll;
+
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<PersonDTO> getAllPersonsByCity(String city) {
+        EntityManager em = emf.createEntityManager();
+        try {
 
             List<PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
             return getAll;

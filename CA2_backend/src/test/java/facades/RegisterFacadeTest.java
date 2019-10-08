@@ -82,7 +82,7 @@ public class RegisterFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-
+        
         p1.addHobby(hobby1);
         p2.addHobby(hobby2);
         p3.addHobby(hobby3);
