@@ -60,7 +60,20 @@ public class RegisterFacade {
         EntityManager em = emf.createEntityManager();
         try {
 
-            List <PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
+            List <PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            return getAll;
+
+        } finally {
+            em.close();
+        }   
+    }
+    
+    public List<PersonDTO> getAllPersonsByCity(String city) {
+        EntityManager em = emf.createEntityManager();
+        try {
+
+            List <PersonDTO> getAll = em.createNamedQuery( "SELECT Person p FROM Person p JOIN c CTIY Where p.")
+                    .setParameter("city", city).getResultList();
             return getAll;
 
         } finally {
@@ -81,7 +94,7 @@ public class RegisterFacade {
     }
     
     //Virker - tjekket a simone d. 07/10-19
-    public List<Person> getPersonsWithSameHobby(String hobby){
+    public List<Person> getAllPersonsWithHobby(String hobby){
         EntityManager em = emf.createEntityManager();
         try{ 
             Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbyCollection hobby where hobby.name=:name",Person.class)

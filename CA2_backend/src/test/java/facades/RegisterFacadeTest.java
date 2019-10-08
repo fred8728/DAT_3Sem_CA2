@@ -82,7 +82,7 @@ public class RegisterFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-
+        
         p1.addHobby(hobby1);
         p2.addHobby(hobby2);
         p3.addHobby(hobby3);
@@ -100,6 +100,7 @@ public class RegisterFacadeTest {
         cinfo3.addAddress(add3);
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
             em.persist(p1);
             em.persist(p2);
             em.persist(p3);
@@ -149,6 +150,7 @@ public class RegisterFacadeTest {
         persons.add(p3);
         persons.add(p4);
         
+     
         assertNotNull(persons);
         assertNotNull(facade.getAllPersons());
         assertEquals(persons.size(), facade.getAllPersons().size());

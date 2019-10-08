@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
-    @NamedQuery(name = "Person.getAll", query = "SELECT p FROM Person p"),
+    @NamedQuery(name = "Person.getAll", query = "SELECT p Person FROM  Person p"),
     //@NamedQuery(name = "Person.getByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.count", query = "SELECT count(p) FROM Person p")})
 
@@ -49,6 +49,8 @@ public class Person implements Serializable {
     @JoinColumn
     private List<Phone> phoneCollection = new ArrayList(); 
     
+//    @ManyToOne
+//    private Address adress;
     
     public Person() {
     }
