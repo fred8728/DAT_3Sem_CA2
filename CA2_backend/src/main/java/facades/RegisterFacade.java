@@ -53,6 +53,16 @@ public class RegisterFacade {
             em.close();
         }
     }
+    
+    public Person getPersonByID(int id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Person person = em.find(Person.class, id);
+            return person;
+        } finally {
+            em.close();
+        }
+    }
 
     //Virker - Tjekket af simone d. 07/10-19
     public List<PersonDTO> getAllPersons() {
