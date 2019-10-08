@@ -129,14 +129,7 @@ public class RegisterFacade {
         Person p = em.find(Person.class, personId);
         Address add = em.find(Address.class, p.getAddress().getId());
         CityInfo ci = em.find(CityInfo.class, add.getCityInfo().getId());
-      //  hobby.getPersons().remove(p);
-
-        /* p.getHobbyCollection().remove(p);
-        p.getPhoneCollection().remove(p);
-        
-        add.getPersons().remove(p);
-        ci.getAddress().remove(p);
-         */ try {
+        try {
             em.getTransaction().begin();
             em.remove(ci);
             em.remove(add);
@@ -149,7 +142,19 @@ public class RegisterFacade {
                 Hobby hobby = em.find(Hobby.class, p.getHobbyCollection().get(i).getId());
                 em.remove(hobby);
             }
-            
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return p;
+    }
+
+    public Person editPerson(int personId, String newName) {
+        EntityManager em = emf.createEntityManager();
+        Person p = em.find(Person.class, personId);
+        try {
+            em.getTransaction().begin();
+             p.setFirstName(newName);
             em.getTransaction().commit();
         } finally {
             em.close();
