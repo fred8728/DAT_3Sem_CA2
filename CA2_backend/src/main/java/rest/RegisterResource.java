@@ -28,7 +28,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @OpenAPIDefinition(
-
             info = @Info(
                     title = "Simple Register API",
                     version = "0.1",
@@ -44,21 +43,20 @@ import javax.ws.rs.core.MediaType;
                             description = "For Local host testing",
                             url = "http://localhost:8080/startcode"
                     )//,
-
 //                    @Server(
 //                            description = "Server API",
 //                            url = "http://mydroplet"
 //                    )
-
-        }
-)
+                          
+            }
+    )
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
 public class RegisterResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-            "pu",
+            "pu",   
             "jdbc:mysql://localhost:3307/startcode",
             "dev",
             "ax2",
@@ -75,13 +73,6 @@ public class RegisterResource {
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Get the count of total persons",
-            tags = {"persons"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
-                @ApiResponse(responseCode = "200", description = "Return Total person count"),
-                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getPersonCount() {
         long count = FACADE.getPersonCount();
         //System.out.println("--------------->"+count);
@@ -91,15 +82,15 @@ public class RegisterResource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Get all persons in a list",
+    /* @Operation(summary = "Get all persons in a list",
             tags = {"persons"},
             responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
-                @ApiResponse(responseCode =  "200", description = "return All persons"),
-                @ApiResponse(responseCode = "404", description = "Persons not found")})
+                     @ApiResponse(
+                     content = @Content(mediaType = "application/json",schema = @Schema(implementation = PersonDTO.class))),
+                    @ApiResponse(responseCode = "200", description = "All persons"),                       
+                    @ApiResponse(responseCode = "400", description = "Persons not found")})*/
     public String getAllPersons() {
-        List<PersonDTO> per = FACADE.getAllPersons();
+        List<Person> per = FACADE.getAllPersons();
         return GSON.toJson(per);
     }
 
@@ -110,7 +101,6 @@ public class RegisterResource {
         Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(p);
     }
-
     @Path("/insertdata")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -120,21 +110,22 @@ public class RegisterResource {
         return "{\"msg\":\"Done\"}";
     }
     
-//    @Path("/get/all/{city}")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonByCity(@PathParam("city") String city) {
-//        List<Person> p = FACADE.getAllPersonsByCity(city);
-//        return GSON.toJson(p);
-//    } 
-    
-    @Path("/get/all/{hobbie}")
+    /*
+    @Path("/get/all/{city}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonByCity(@PathParam("hobbie") String hobbie) {
-        List<Person> p = FACADE.getPersonsWithSameHobby(hobbie);
+    public String getPersonByCity(@PathParam("city") String city) {
+        List<Person> p = FACADE.getAllFromCity(city);
         return GSON.toJson(p);
-    }
+    }*/
+    
+//    @Path("/get/all/{hobbie}")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getPersonByCity(@PathParam("hobbie") String hobbie) {
+//        List<Person> p = FACADE.findAllPersonswithHobbie(hobbie);
+//        return GSON.toJson(p);
+//    }
     
 //    @Path("/get/count/{hobbie}")
 //    @GET
@@ -143,6 +134,7 @@ public class RegisterResource {
 //        int p = FACADE.getAllHobbieCount(hobbie);
 //        return GSON.toJson(p);
 //    }
+    
 //    @PUT
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -159,6 +151,7 @@ public class RegisterResource {
 //        // makes that the value return is on a good json format
 //        return GSON.toJson(pOrignal);
 //    }
+    
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -170,8 +163,8 @@ public class RegisterResource {
 //        System.out.println("val sent");
 //        return gson.toJson(personNew);
 //    }
+    
     //Delete er ikke testet endnu - 
-
 //    @DELETE
 //    @Produces({MediaType.APPLICATION_JSON})
 //    @Consumes({MediaType.APPLICATION_JSON})
@@ -183,6 +176,7 @@ public class RegisterResource {
 //        return GSON.toJson(p1);
 //        
 //    }
+    
     
 
 }

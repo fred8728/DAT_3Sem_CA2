@@ -36,7 +36,6 @@ public class PersonDTO {
         this.phone = p.getPhoneCollection();
         this.email = p.getEmail();
         this.hobby = h.getDescription();
-        this.address = ad.getStreet();
     }
 
     public int getId() {
@@ -85,6 +84,8 @@ public class PersonDTO {
     public void setHobby(String hobby) {
         this.hobby = hobby;
     }
+    
+    
     @Override
     public String toString() {
         return "PersonDTO{" + "id=" + id + ", name=" + name + /*", address=" + address + ", phone=" + phone + ", hobby=" + hobby +*/ '}';

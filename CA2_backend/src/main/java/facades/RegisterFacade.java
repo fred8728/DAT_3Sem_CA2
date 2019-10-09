@@ -55,13 +55,14 @@ public class RegisterFacade {
     }
 
     //Virker - Tjekket af simone d. 07/10-19
-    public List<PersonDTO> getAllPersons() {
+    public List<Person> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
-           //    List<Person> personList = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+             TypedQuery query = em.createQuery("SELECT p Person FROM Person p ", Person.class);
             
-            List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
-            return getAll;
+                   
+          //  List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            return query.getResultList();
 
         } finally {
             em.close();
@@ -199,4 +200,27 @@ public class RegisterFacade {
             em.close();
         }
     }
+    
+    public List<Person> getAllPersonsFromCity(String cityname){
+         EntityManager em = emf.createEntityManager();
+       
+          
+       /*  SELECT e FROM Employee e 
+         JOIN e.projects p 
+         JOIN e.projects p2 
+         WHERE p.name = :p1 and p2.name = :p2 */
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT p FROM Person p"
+                    + " JOIN  p.address_id a "
+                    + " JOIN a.address c"
+                    //+ " WHERE c.city = cityname;"
+                    , Person.class) .setParameter("cityname", cityname);;
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+        
+    }
+        
 }
