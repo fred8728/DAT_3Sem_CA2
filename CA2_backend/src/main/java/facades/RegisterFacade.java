@@ -58,10 +58,9 @@ public class RegisterFacade {
     public List<Person> getAllPersons() {
         EntityManager em = emf.createEntityManager();
         try {
-             TypedQuery query = em.createQuery("SELECT p Person FROM Person p ", Person.class);
-            
-                   
-          //  List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
+            TypedQuery query = em.createQuery("SELECT p Person FROM Person p ", Person.class);
+
+            //  List<PersonDTO> getAll = em.createQuery("SELECT p Person FROM Person p ").getResultList();
             return query.getResultList();
 
         } finally {
@@ -69,13 +68,23 @@ public class RegisterFacade {
         }
     }
 
-    public List<PersonDTO> getAllPersonsByCity(String city) {
+    public Person getPersonByID(int id) {
         EntityManager em = emf.createEntityManager();
         try {
+            Person person = em.find(Person.class, id);
+            return person;
+        } finally {
+            em.close();
+        }
+    }
 
-            List<PersonDTO> getAll = em.createNamedQuery("Person.getAll").getResultList();
-            return getAll;
-
+    public PersonDTO makeDTO(int pID, int aID) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Person person = em.find(Person.class, pID);
+            Address add = em.find(Address.class, aID);
+             return new PersonDTO(person,add);
+             
         } finally {
             em.close();
         }
@@ -117,7 +126,7 @@ public class RegisterFacade {
         }
     }
 
-    //Virker - lavet af Simone d. 07/10-19
+    //Virker - lavet af Simone d. 07/10-19 
     public Person addPerson(Person p, Phone phone, Address add, CityInfo ci, Hobby hobby) {
         p.addHobby(hobby);
         p.addPhone(phone);
@@ -168,18 +177,18 @@ public class RegisterFacade {
         Person p = em.find(Person.class, personId);
         try {
             em.getTransaction().begin();
-             p.setFirstName(newName);
+            p.setFirstName(newName);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
         return p;
     }
-    
-    public void insertData(){
-            EntityManager em = emf.createEntityManager();
-            Address add1 = new Address("Villavej 5", "Ishøj");
-            Address add2 = new Address("Villavej 7", "Farum");
+
+    public void insertData() {
+        EntityManager em = emf.createEntityManager();
+        Address add1 = new Address("Villavej 5", "Ishøj");
+        Address add2 = new Address("Villavej 7", "Farum");
         Person p1 = new Person("Cathrine", "Hansen", "cathrinehansen@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
@@ -187,20 +196,19 @@ public class RegisterFacade {
         CityInfo info = new CityInfo(2635, "Ishøj");
         CityInfo info1 = new CityInfo(3520, "Farum");
         Hobby hobby = new Hobby("Shopping", "Køber unødvendigt");
-        
+
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
             em.persist(addPerson(p1, phone1, add1, info, hobby));
-            em.persist(addPerson(p2, phone2, add2, info1,hobby));
-            
+            em.persist(addPerson(p2, phone2, add2, info1, hobby));
 
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
-    
+
 //    public List<Person> getAllPersonsFromCity(String cityname){
 //         EntityManager em = emf.createEntityManager();
 //       
@@ -222,5 +230,4 @@ public class RegisterFacade {
 //        }
 //        
 //    }
-        
 }
