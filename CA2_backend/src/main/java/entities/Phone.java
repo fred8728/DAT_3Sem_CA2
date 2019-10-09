@@ -40,7 +40,7 @@ public class Phone implements Serializable {
     @Column(name = "phone_description")
     private String description;
     @ManyToOne
-    private Person person;
+    private transient Person person;
     
     
     public Phone() {
@@ -85,10 +85,10 @@ public class Phone implements Serializable {
     
     
 
-    @Override
-    public String toString() {
-        return "Phone{" + "id=" + id + ", number=" + number + ", description=" + description + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Phone{" + "id=" + id + ", number=" + number + ", description=" + description + '}';
+//    }
 
    
 

@@ -53,6 +53,16 @@ public class RegisterFacade {
             em.close();
         }
     }
+    
+    public Person getPersonByID(int id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Person person = em.find(Person.class, id);
+            return person;
+        } finally {
+            em.close();
+        }
+    }
 
     //Virker - Tjekket af simone d. 07/10-19
     public List<Person> getAllPersons() {
@@ -130,6 +140,7 @@ public class RegisterFacade {
             em.persist(phone);
             em.persist(add);
             em.persist(ci);
+            em.persist(hobby);
             em.getTransaction().commit();
             return p;
         } finally {
@@ -184,15 +195,38 @@ public class RegisterFacade {
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
         Phone phone2 = new Phone(12345678, "yeet");
-        CityInfo info = new CityInfo(2635, "Ishøj");
-        CityInfo info1 = new CityInfo(3520, "Farum");
-        Hobby hobby = new Hobby("Shopping", "Køber unødvendigt");
+        CityInfo info1 = new CityInfo(2635, "Ishøj");
+        CityInfo info2 = new CityInfo(3520, "Farum");
+        Hobby hobby1 = new Hobby("Shopping", "Køber unødvendigt");
+        Hobby hobby2 = new Hobby("Cykling", "Cykler hurtigt");
+        p1.addHobby(hobby1);
+        p1.addPhone(phone1);
+        add1.addPerson(p1);
+        info1.addAddress(add1);
+        
+        p2.addHobby(hobby2);
+        p2.addPhone(phone2);
+        add2.addPerson(p2);
+        info2.addAddress(add2);
         
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.persist(addPerson(p1, phone1, add1, info, hobby));
-            em.persist(addPerson(p2, phone2, add2, info1,hobby));
+            em.createNamedQuery("Hobby.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+            em.persist(p1);
+            em.persist(hobby1);
+            em.persist(phone1);
+            em.persist(add1);
+            em.persist(info1);
+            em.persist(p2);
+            em.persist(hobby2);
+            em.persist(phone2);
+            em.persist(add2);
+            em.persist(info2);
+            
             
 
             em.getTransaction().commit();
