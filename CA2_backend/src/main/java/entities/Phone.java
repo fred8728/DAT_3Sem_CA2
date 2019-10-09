@@ -40,7 +40,7 @@ public class Phone implements Serializable {
     @Column(name = "phone_description")
     private String description;
     @ManyToOne
-    private transient Person person;
+    private Person person;
     
     
     public Phone() {

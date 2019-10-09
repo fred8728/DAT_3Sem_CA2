@@ -41,9 +41,9 @@ public class Address implements Serializable {
 
     
     @OneToMany(mappedBy = "address")
-    private transient List <Person> persons = new ArrayList();
+    private List <Person> persons = new ArrayList();
     @ManyToOne
-    private transient CityInfo cityInfo;
+    private CityInfo cityInfo;
     
     public Address() {
     }
