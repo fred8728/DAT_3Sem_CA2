@@ -83,8 +83,8 @@ public class RegisterFacade {
         try {
             Person person = em.find(Person.class, pID);
             Address add = em.find(Address.class, aID);
-             return new PersonDTO(person,add);
-             
+            return new PersonDTO(person, add);
+
         } finally {
             em.close();
         }

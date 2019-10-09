@@ -28,35 +28,35 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @OpenAPIDefinition(
-            info = @Info(
-                    title = "Simple Register API",
-                    version = "0.1",
-                    description = "Simple API to get info about a registerd person.",        
-                    contact = @Contact( name = "Gruppe 9", email = "cph-ao141@cphbusiness.dk")
-            ),
-          tags = {
-                    @Tag(name = "register", description = "API related to Movie Info")
-              
-            },
-            servers = {
-                    @Server(
-                            description = "For Local host testing",
-                            url = "http://localhost:8080/startcode"
-                    )//,
+        info = @Info(
+                title = "Simple Register API",
+                version = "0.1",
+                description = "Simple API to get info about a registerd person.",
+                contact = @Contact(name = "Gruppe 9", email = "cph-ao141@cphbusiness.dk")
+        ),
+        tags = {
+            @Tag(name = "register", description = "API related to Movie Info")
+
+        },
+        servers = {
+            @Server(
+                    description = "For Local host testing",
+                    url = "http://localhost:8080/startcode"
+            )//,
 //                    @Server(
 //                            description = "Server API",
 //                            url = "http://mydroplet"
 //                    )
-                          
-            }
-    )
+
+        }
+)
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
 public class RegisterResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-            "pu",   
+            "pu",
             "jdbc:mysql://localhost:3307/startcode",
             "dev",
             "ax2",
@@ -78,15 +78,14 @@ public class RegisterResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
-    
-   /* @Path("{id}")
+
+    /* @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonById(@PathParam("id") int id) {
         Person person = FACADE.getPersonByID(id);
         return GSON.toJson(person);
     }*/
-
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -102,13 +101,22 @@ public class RegisterResource {
         return GSON.toJson(per);
     }
 
-    @Path("/get/{phone}")
+    @Path("/get/phone{phone}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(p);
     }
+
+    @Path("/get/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonDTO(@PathParam("id") int id) {
+        PersonDTO p = FACADE.makeDTO(id, id);
+        return GSON.toJson(p);
+    }
+
     @Path("/insertdata")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -117,7 +125,7 @@ public class RegisterResource {
         FACADE.insertData();
         return "{\"msg\":\"Done\"}";
     }
-    
+
     /*
     @Path("/get/all/{city}")
     @GET
@@ -126,7 +134,6 @@ public class RegisterResource {
         List<Person> p = FACADE.getAllFromCity(city);
         return GSON.toJson(p);
     }*/
-    
 //    @Path("/get/all/{hobbie}")
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -134,7 +141,6 @@ public class RegisterResource {
 //        List<Person> p = FACADE.findAllPersonswithHobbie(hobbie);
 //        return GSON.toJson(p);
 //    }
-    
 //    @Path("/get/count/{hobbie}")
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -142,7 +148,6 @@ public class RegisterResource {
 //        int p = FACADE.getAllHobbieCount(hobbie);
 //        return GSON.toJson(p);
 //    }
-    
 //    @PUT
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -159,7 +164,6 @@ public class RegisterResource {
 //        // makes that the value return is on a good json format
 //        return GSON.toJson(pOrignal);
 //    }
-    
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -171,7 +175,6 @@ public class RegisterResource {
 //        System.out.println("val sent");
 //        return gson.toJson(personNew);
 //    }
-    
     //Delete er ikke testet endnu - 
 //    @DELETE
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -184,7 +187,4 @@ public class RegisterResource {
 //        return GSON.toJson(p1);
 //        
 //    }
-    
-    
-
 }

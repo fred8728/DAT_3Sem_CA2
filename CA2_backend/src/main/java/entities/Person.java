@@ -123,10 +123,10 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", hobbyCollection=" + hobbyCollection + ", phoneCollection=" + phoneCollection + ", address=" + address + '}';
+    }
 
-//    @Override
-//    public String toString() {
-//        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + '}';
-//    }
+    
 }
