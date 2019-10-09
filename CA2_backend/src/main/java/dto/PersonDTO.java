@@ -26,16 +26,20 @@ public class PersonDTO {
     @Schema(example = "[1,21212121,\"a phone number of johnny\"]")
     private List<Phone> phone;
     @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
-    private String hobby;
+    private List<Hobby> hobby;
     @Schema(example = "something-cph-@cphbusiness.dk")
     private String email;
+    @Schema(example = "placeholder")
+    private String city;
 
-    public PersonDTO(Person p, Phone ph, Address ad,Hobby h) {
+    public PersonDTO(Person p, Address ad) {
+        this.id = p.getId();
         this.name = p.getFirstName() + " " + p.getLastName();
-        this.address = p.getAddress().getStreet();
+        this.address = ad.getStreet();
         this.phone = p.getPhoneCollection();
         this.email = p.getEmail();
-        this.hobby = h.getDescription();
+        this.hobby = p.getHobbyCollection();
+        this.city = ad.getCityInfo().getCity();
     }
 
     public int getId() {
@@ -69,23 +73,31 @@ public class PersonDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
     public List<Phone> getPhone() {
         return phone;
     }
 
-    public void setPhone(List <Phone> phone) {
+    public void setPhone(List<Phone> phone) {
         this.phone = phone;
     }
 
-    public String getHobby() {
+    public List<Hobby> getHobby() {
         return hobby;
     }
 
-    public void setHobby(String hobby) {
+    public void setHobby(List<Hobby> hobby) {
         this.hobby = hobby;
     }
-    
-    
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
         return "PersonDTO{" + "id=" + id + ", name=" + name + /*", address=" + address + ", phone=" + phone + ", hobby=" + hobby +*/ '}';

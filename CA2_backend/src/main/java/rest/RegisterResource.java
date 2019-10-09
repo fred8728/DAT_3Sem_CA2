@@ -79,13 +79,13 @@ public class RegisterResource {
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
     
-    @Path("{id}")
+   /* @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonById(@PathParam("id") int id) {
         Person person = FACADE.getPersonByID(id);
         return GSON.toJson(person);
-    }
+    }*/
 
     @Path("all")
     @GET
