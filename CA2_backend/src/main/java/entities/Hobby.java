@@ -47,7 +47,7 @@ public class Hobby implements Serializable {
         @JoinColumn(name = "person_id", referencedColumnName = "id")})
 
     @ManyToMany(mappedBy = "hobbyCollection")
-    private List<Person> personCollection = new ArrayList();
+    private transient List<Person> personCollection = new ArrayList();
 
     public Hobby() {
     }
@@ -89,9 +89,9 @@ public class Hobby implements Serializable {
         this.personCollection.add(p);
     }
 
-    @Override
-    public String toString() {
-        return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+//    }
 
 }

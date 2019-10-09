@@ -22,7 +22,7 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
+@Disabled
 public class RegisterFacadeTest {
 
     private static EntityManagerFactory emf;
