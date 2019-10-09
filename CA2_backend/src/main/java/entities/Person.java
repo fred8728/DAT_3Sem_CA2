@@ -42,16 +42,16 @@ public class Person implements Serializable {
     private String email;
     
     @ManyToMany(cascade=CascadeType.PERSIST)
-    private transient List<Hobby> hobbyCollection = new ArrayList();
+    private List<Hobby> hobbyCollection = new ArrayList();
     
     
 
     @OneToMany(mappedBy = "person")
-    private transient List<Phone> phoneCollection = new ArrayList(); 
+    private List<Phone> phoneCollection = new ArrayList(); 
     
 
     @ManyToOne
-    private transient Address address;
+    private Address address;
 
     
     public Person() {

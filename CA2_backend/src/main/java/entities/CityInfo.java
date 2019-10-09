@@ -44,7 +44,7 @@ public class CityInfo implements Serializable {
 
 
     @OneToMany(mappedBy = "cityInfo")
-    private transient List<Address> address = new ArrayList();
+    private List<Address> address = new ArrayList();
 
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;

@@ -47,7 +47,7 @@ public class Hobby implements Serializable {
         @JoinColumn(name = "person_id", referencedColumnName = "id")})
 
     @ManyToMany(mappedBy = "hobbyCollection")
-    private transient List<Person> personCollection = new ArrayList();
+    private List<Person> personCollection = new ArrayList();
 
     public Hobby() {
     }
