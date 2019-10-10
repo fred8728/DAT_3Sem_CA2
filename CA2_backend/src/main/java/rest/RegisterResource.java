@@ -169,6 +169,7 @@ public class RegisterResource {
         // makes that the value return is on a good json format
         return GSON.toJson(pOrignal);
     }
+
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -180,6 +181,7 @@ public class RegisterResource {
 //        System.out.println("val sent");
 //        return gson.toJson(personNew);
 //    }
+
     //Delete er ikke testet endnu - 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
@@ -192,11 +194,6 @@ public class RegisterResource {
         return "{}";
    }
 
-//        @Path("{id}")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonById(@PathParam("id") int id) {
-//        Person person = FACADE.getPersonByID(id);
-//        return GSON.toJson(person);
-//    }
+
 }
+

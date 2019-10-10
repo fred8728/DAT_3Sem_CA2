@@ -1,19 +1,18 @@
  import 'bootstrap/dist/css/bootstrap.css'
-import jokes from "./jokes"; 
+ //import jokes from "./jokes"; 
 
-document.getElementById("but3").addEventListener("click", function(){
-    document.getElementById("div2").innerhtml ="<p> Yeet</p>"  ;})
 
     //for fetching all users in JSON not tested
 document.getElementById("but4").addEventListener("click", function(){
-    fetch('https://frederikkesimone.dk/Register/api/person/all')
+    fetch('http://localhost:8080/CA2/api/person/all'/* 'https://frederikkesimone.dk/Register/api/person/all' */)
     .then(function(response) {
         return response.json();
       })
       .then(function(myJson) {
-        document.getElementById("div1").innerHTML = PersonToHTMLTable(myJson);
+        document.getElementById("div3").innerHTML = PersonToHTMLTable(myJson);
       });
 });
+
 //not sure about what values will be displayed in the Json but need to fix them below
 function PersonToHTMLTable(arr){
     var arrHTML = arr.map(item => "<tr>"
@@ -70,8 +69,10 @@ document.getElementById("but5").addEventListener("click",function(){
     }
 
 
-document.getElementById("but2").addEventListener("click", function(){
-    document.getElementById("div1").innerhtml =   "<p> The following is a list of the sprint log which we have chosen to make for this project <br>" +
+
+document.getElementById("logdata").addEventListener("click", function(){
+    document.getElementById("valueLog").innerHTML =  //" boi bithc";
+    "<p> The following is a list of the sprint log which we have chosen to make for this project <br>" +
      "it has been split into tree mini sprint which is shown in the list down below. <br>" +
      "There will be tried to complete as many of the given task as possible in the following week to this project." +
  "</p>" +
@@ -136,11 +137,11 @@ document.getElementById("but2").addEventListener("click", function(){
              "</li> </ul> </li> <li>" +
         " Complete documentation and prepare for your review presentation after the holiday" +
      + " </li> </ul></div>" ;
-
 });
+
 document.getElementById("but1").addEventListener("click", function(){
-    document.getElementById("div1").innerHTML = "<table border=" + "1px" + 
-    "> <tr>" +
+    document.getElementById("div1").innerHTML = "<table border=" + "1px>" + 
+    " <tr>" +
         "<th width = 100px>Method</th>" +
         "<th width = 100px>Endpoint</th>" +
         "<th width = 100px>Request body (JSON)</th>"+
