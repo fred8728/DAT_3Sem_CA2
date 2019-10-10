@@ -23,6 +23,8 @@ public class PersonDTO {
     private String name;
     @Schema(required = true, example = "ringvejen")
     private String address;
+    @Schema(required = true, example = "info")
+    private String additinalinfo;
     @Schema(example = "[1,21212121,\"a phone number of johnny\"]")
     private int phone;
     @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
@@ -36,6 +38,7 @@ public class PersonDTO {
         this.id = p.getId();
         this.name = p.getFirstName() + " " + p.getLastName();
         this.address = p.getAddress().getStreet();
+        this.additinalinfo = p.getAddress().getAdditionalinfo();
         for (int i = 0; i < p.getPhoneCollection().size(); i++) {
             this.phone += p.getPhoneCollection().get(i).getNumber();
         }
@@ -100,6 +103,14 @@ public class PersonDTO {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getAdditinalinfo() {
+        return additinalinfo;
+    }
+
+    public void setAdditinalinfo(String additinalinfo) {
+        this.additinalinfo = additinalinfo;
     }
 
     @Override

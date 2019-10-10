@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,6 +52,7 @@ import javax.ws.rs.core.MediaType;
 
         }
 )
+
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
@@ -111,7 +113,6 @@ public class RegisterResource {
         return GSON.toJson(FACADE.makeDTO(p.getId()));
     }
 
-    
     @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -169,17 +170,16 @@ public class RegisterResource {
         // makes that the value return is on a good json format
         return GSON.toJson(pOrignal);
     }
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String addPerson(String personAsJson) {
-//        Person personNew = gson.fromJson(personAsJson, Person.class);
-//        persons.put(nextId, personNew);
-//        personNew.setId(nextId);
-//        nextId++;
-//        System.out.println("val sent");
-//        return gson.toJson(personNew);
-//    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addPerson(String personAsJson) {
+        PersonDTO personNew = GSON.fromJson(personAsJson, PersonDTO.class);
+        PersonDTO p = FACADE.addPerson(personNew);
+        return GSON.toJson(personNew);
+
+    }
     //Delete er ikke testet endnu - 
 //    @DELETE
 //    @Produces({MediaType.APPLICATION_JSON})

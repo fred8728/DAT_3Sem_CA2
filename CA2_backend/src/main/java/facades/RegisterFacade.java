@@ -145,6 +145,19 @@ public class RegisterFacade {
         }
     }
 
+//        @Override
+    public PersonDTO addPerson(PersonDTO pdto) {
+        EntityManager em = getEntityManager();
+        Person p = new Person(pdto.getName(), pdto.getName(), pdto.getEmail());
+        Address a = new Address(pdto.getAddress(), pdto.getAdditinalinfo());
+        em.getTransaction().begin();
+        Address mergedAddress = em.merge(a);
+        p.setAddress(mergedAddress);
+        em.persist(p);
+        em.getTransaction().commit();
+        return new PersonDTO(p);
+    }
+
     //Virker ikke - simone er i gang
     public Person deletePerson(int personId) {
         EntityManager em = emf.createEntityManager();
