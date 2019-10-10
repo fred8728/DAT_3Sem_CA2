@@ -37,29 +37,34 @@ function PersonToHTMLTable(arr){
 document.getElementById("but5").addEventListener("click",function(){
     var test = document.getElementById("inp1");
     //console.log(test.value);
-    fetch('https://frederikkesimone.dk/Register/api/person/'+ test.value)
+    //fetch('https://frederikkesimone.dk/Register/api/person/'+ test.value)
+    fetch('http://localhost:8080/CA2/api/person/'+ test.value)
     .then(function(response) {
         return response.json();
       })
       .then(function(myJson) {  
-        document.getElementById("div1").innerHTML = PersonToHTML(myJson); 
+        document.getElementById("div3").innerHTML = PersonToHTML(myJson); 
       });
     });
     
     function PersonToHTML(item){
         var arrHTML = "<tr>"
-                    + "<td>" + item.age + "</td>"
-                    + "<td>" + item.name + "</td>"
-                    + "<td>" + item.gender + "</td>"
-                    + "<td>" + item.email + "</td>"
                     + "<td>" + item.id + "</td>"
+                    + "<td>" + item.name + "</td>"
+                    + "<td>" + item.address + "</td>"
+                    + "<td>" + item.phone + "</td>"
+                    + "<td>" + item.hobby + "</td>"
+                    + "<td>" + item.email + "</td>"
+                    + "<td>" + item.city + "</td>"
                     + "</tr>";
         var result = "<table class=\"table table-striped\"><tr>"
-                + "<th width = 10%>Age</th>"
-                + "<th width = 10%>Name</th>"
-                + "<th width = 10%>Gender</th>"
-                + "<th width = 10%>Email</th>"
                 + "<th width = 10%>ID</th>"
+                + "<th width = 10%>Name</th>"
+                + "<th width = 10%>Address</th>"
+                + "<th width = 10%>Phone</th>"
+                + "<th width = 10%>Hobby</th>"
+                + "<th width = 10%>Email</th>"
+                + "<th width = 10%>City</th>"
                 + arrHTML + "</table>";
         return result;
     }
