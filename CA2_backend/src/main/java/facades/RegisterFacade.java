@@ -184,10 +184,19 @@ public class RegisterFacade {
         return p;
     }
 
+<<<<<<< HEAD
     public void insertData() {
         EntityManager em = emf.createEntityManager();
         Address add1 = new Address("Villavej 5", "Ishøj");
         Address add2 = new Address("Villavej 167", "Farum");
+=======
+    
+    public void insertData(){
+        //Ikke fuck min metode
+            EntityManager em = emf.createEntityManager();
+            Address add1 = new Address("Villavej 5", "Ishøj");
+            Address add2 = new Address("Villavej 167", "Farum");
+>>>>>>> c7605b0da56227e716f5de61daf837d821b43851
         Person p1 = new Person("Kurt", "Frandsen", "Enator@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
@@ -196,6 +205,17 @@ public class RegisterFacade {
         CityInfo info2 = new CityInfo(3520, "Farum");
         Hobby hobby1 = new Hobby("Shopping", "Køber unødvendigt");
         Hobby hobby2 = new Hobby("Cykle", "Tour de france");
+        
+        
+        p1.addHobby(hobby1);
+        p1.addPhone(phone1);
+        add1.addPerson(p1);
+        info1.addAddress(add1);
+        
+        p2.addHobby(hobby2);
+        p2.addPhone(phone2);
+        add2.addPerson(p2);
+        info2.addAddress(add2);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
