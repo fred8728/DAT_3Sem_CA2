@@ -63,7 +63,8 @@ public class Person implements Serializable {
         this.email = email;
         this.phoneCollection = new ArrayList();
         this.hobbyCollection = new ArrayList();
-    }
+    }    
+    
     
     public int getId() {
         return id;
