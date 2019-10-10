@@ -111,6 +111,7 @@ public class RegisterResource {
         return GSON.toJson(FACADE.makeDTO(p.getId()));
     }
 
+    
     @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
