@@ -181,17 +181,16 @@ public class RegisterResource {
 //        return gson.toJson(personNew);
 //    }
     //Delete er ikke testet endnu - 
-//    @DELETE
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    @Path("{phone}")
-//    public String deletePerson(@PathParam("phone") int phone){
-//        Person p = FACADE.getPersonByPhone(phone);
-//        int id = p.getId();
-//        Person p1 = FACADE.deletePerson(id);
-//        return GSON.toJson(p1);
-//        
-//    }
+    @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("{id}")
+    public String deletePerson(@PathParam("id") int id){
+        Person p = FACADE.getPersonByID(id);
+        int id1 = p.getId();
+        FACADE.deletePerson(id1);
+        return "{}";
+   }
 
 //        @Path("{id}")
 //    @GET
