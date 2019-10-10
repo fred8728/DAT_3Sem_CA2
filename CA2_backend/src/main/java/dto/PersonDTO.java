@@ -26,20 +26,24 @@ public class PersonDTO {
     @Schema(example = "[1,21212121,\"a phone number of johnny\"]")
     private int phone;
     @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
-    private String hobby;
+    private String hobby = "";
     @Schema(example = "something-cph-@cphbusiness.dk")
     private String email;
     @Schema(example = "placeholder")
     private String city;
 
-    public PersonDTO(Person p, Address ad) {
+    public PersonDTO(Person p) {
         this.id = p.getId();
         this.name = p.getFirstName() + " " + p.getLastName();
-        this.address = ad.getStreet();
-        this.phone = p.getPhoneCollection().get(0).getNumber();
+        this.address = p.getAddress().getStreet();
+        for (int i = 0; i < p.getPhoneCollection().size(); i++) {
+            this.phone += p.getPhoneCollection().get(i).getNumber();
+        }
         this.email = p.getEmail();
-        this.hobby = p.getHobbyCollection().get(0).getName();
-        this.city = ad.getCityInfo().getCity();
+        for (int i = 0; i < p.getHobbyCollection().size(); i++) {
+            this.hobby = p.getHobbyCollection().get(i).getName();
+        }
+        this.city = p.getAddress().getCityInfo().getCity();
     }
 
     public int getId() {

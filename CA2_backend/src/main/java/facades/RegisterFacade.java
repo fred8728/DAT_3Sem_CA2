@@ -78,12 +78,11 @@ public class RegisterFacade {
         }
     }
 
-    public PersonDTO makeDTO(int pID, int aID) {
+    public PersonDTO makeDTO(int pID) {
         EntityManager em = emf.createEntityManager();
         try {
             Person person = em.find(Person.class, pID);
-            Address add = em.find(Address.class, aID);
-            return new PersonDTO(person, add);
+            return new PersonDTO(person);
 
         } finally {
             em.close();

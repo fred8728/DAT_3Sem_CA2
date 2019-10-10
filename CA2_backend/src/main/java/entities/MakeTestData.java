@@ -71,7 +71,7 @@ public class MakeTestData {
         System.out.println(facade.getAllPersons());
     //    facade.getAllPersonsFromCity("Ishøj");
         System.out.println(facade.getPersonByID(2));
-        System.out.println(facade.makeDTO(2, 2));
+        System.out.println(facade.makeDTO(2));
         
     }
 }
