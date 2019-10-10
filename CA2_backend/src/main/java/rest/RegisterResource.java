@@ -180,24 +180,19 @@ public class RegisterResource {
         return GSON.toJson(personNew);
 
     }
-    //Delete er ikke testet endnu - 
-//    @DELETE
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    @Path("{phone}")
-//    public String deletePerson(@PathParam("phone") int phone){
-//        Person p = FACADE.getPersonByPhone(phone);
-//        int id = p.getId();
-//        Person p1 = FACADE.deletePerson(id);
-//        return GSON.toJson(p1);
-//        
-//    }
 
-//        @Path("{id}")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonById(@PathParam("id") int id) {
-//        Person person = FACADE.getPersonByID(id);
-//        return GSON.toJson(person);
-//    }
+    //Delete er ikke testet endnu - 
+    @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("{id}")
+    public String deletePerson(@PathParam("id") int id){
+        Person p = FACADE.getPersonByID(id);
+        int id1 = p.getId();
+        FACADE.deletePerson(id1);
+        return "{}";
+   }
+
+
 }
+
