@@ -79,13 +79,7 @@ public class RegisterResource {
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
 
-    @Path("{id}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonById(@PathParam("id") int id) {
-        Person person = FACADE.getPersonByID(id);
-        return GSON.toJson(person);
-    }
+
     
     @Path("all")
     @GET
@@ -110,11 +104,11 @@ public class RegisterResource {
         return GSON.toJson(p);
     }
 
-    @Path("/get/{id}")
+    @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonDTO(@PathParam("id") int id) {
-        PersonDTO p = FACADE.makeDTO(id, id);
+        PersonDTO p = FACADE.makeDTO(id);
         return GSON.toJson(p);
     }
 
@@ -187,5 +181,14 @@ public class RegisterResource {
 //        Person p1 = FACADE.deletePerson(id);
 //        return GSON.toJson(p1);
 //        
+//    }
+    
+    
+//        @Path("{id}")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getPersonById(@PathParam("id") int id) {
+//        Person person = FACADE.getPersonByID(id);
+//        return GSON.toJson(person);
 //    }
 }
