@@ -184,19 +184,14 @@ public class RegisterFacade {
         return p;
     }
 
-<<<<<<< HEAD
-    public void insertData() {
-        EntityManager em = emf.createEntityManager();
-        Address add1 = new Address("Villavej 5", "Ishøj");
-        Address add2 = new Address("Villavej 167", "Farum");
-=======
-    
+
+ 
     public void insertData(){
         //Ikke fuck min metode
             EntityManager em = emf.createEntityManager();
             Address add1 = new Address("Villavej 5", "Ishøj");
             Address add2 = new Address("Villavej 167", "Farum");
->>>>>>> c7605b0da56227e716f5de61daf837d821b43851
+
         Person p1 = new Person("Kurt", "Frandsen", "Enator@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
