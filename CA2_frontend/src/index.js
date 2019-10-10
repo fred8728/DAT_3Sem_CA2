@@ -1,8 +1,8 @@
  import 'bootstrap/dist/css/bootstrap.css'
-import jokes from "./jokes"; 
+ //import jokes from "./jokes"; 
 
 document.getElementById("but3").addEventListener("click", function(){
-    document.getElementById("div2").innerhtml ="<p> Yeet</p>"  ;})
+    document.getElementById("div2").innerhtml ="<p> Yeet</p>";})
 
     //for fetching all users in JSON not tested
 document.getElementById("but4").addEventListener("click", function(){
@@ -133,6 +133,7 @@ document.getElementById("but2").addEventListener("click", function(){
      + " </li> </ul></div>" ;
 
 });
+
 document.getElementById("but1").addEventListener("click", function(){
     document.getElementById("div1").innerHTML = "<table border=" + "1px" + 
     "> <tr>" +

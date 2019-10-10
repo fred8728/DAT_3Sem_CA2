@@ -78,7 +78,7 @@ public class RegisterResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
-
+        
     /* @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -148,6 +148,15 @@ public class RegisterResource {
 //        int p = FACADE.getAllHobbieCount(hobbie);
 //        return GSON.toJson(p);
 //    }
+    
+//    @Path("/get/all/zipcode")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getPersonByCity() {
+//        List<int> zipCodes = FACADE.getAllZipcodes();// add a method which returns all zipcodes in the system.
+//        return GSON.toJson(zipCodes);
+        
+
 //    @PUT
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -175,7 +184,7 @@ public class RegisterResource {
 //        System.out.println("val sent");
 //        return gson.toJson(personNew);
 //    }
-    //Delete er ikke testet endnu - 
+        //Delete er ikke testet endnu - 
 //    @DELETE
 //    @Produces({MediaType.APPLICATION_JSON})
 //    @Consumes({MediaType.APPLICATION_JSON})
@@ -187,4 +196,7 @@ public class RegisterResource {
 //        return GSON.toJson(p1);
 //        
 //    }
+//    }
+    
 }
+
