@@ -177,7 +177,7 @@ public class RegisterResource {
     public String addPerson(String personAsJson) {
         PersonDTO personNew = GSON.fromJson(personAsJson, PersonDTO.class);
         PersonDTO p = FACADE.addPerson(personNew);
-        return GSON.toJson(personNew);
+        return GSON.toJson(p);
 
     }
 

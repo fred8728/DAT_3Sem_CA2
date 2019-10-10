@@ -200,8 +200,8 @@ public class RegisterFacade {
     public void insertData() {
         //Ikke fuck min metode
         EntityManager em = emf.createEntityManager();
-        Address add1 = new Address("Villavej 5", "Ishøj");
-        Address add2 = new Address("Villavej 167", "Farum");
+        Address add1 = new Address("Villavej 5", "først vej til højre");
+        Address add2 = new Address("Villavej 167", "kom ind ad bagindgangen");
         Person p1 = new Person("Kurt", "Frandsen", "Enator@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
