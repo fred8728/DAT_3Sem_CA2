@@ -184,11 +184,10 @@ public class RegisterFacade {
         return p;
     }
 
-    
-    public void insertData(){
-            EntityManager em = emf.createEntityManager();
-            Address add1 = new Address("Villavej 5", "Ishøj");
-            Address add2 = new Address("Villavej 167", "Farum");
+    public void insertData() {
+        EntityManager em = emf.createEntityManager();
+        Address add1 = new Address("Villavej 5", "Ishøj");
+        Address add2 = new Address("Villavej 167", "Farum");
         Person p1 = new Person("Kurt", "Frandsen", "Enator@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
@@ -209,7 +208,7 @@ public class RegisterFacade {
             em.persist(phone1);
             em.persist(add1);
             em.persist(info1);
-            
+
             em.persist(p2);
             em.persist(hobby2);
             em.persist(phone2);
@@ -221,25 +220,19 @@ public class RegisterFacade {
         }
     }
 
-//    public List<Person> getAllPersonsFromCity(String cityname){
-//         EntityManager em = emf.createEntityManager();
-//       
-//          
-//       /*  SELECT e FROM Employee e 
-//         JOIN e.projects p 
-//         JOIN e.projects p2 
-//         WHERE p.name = :p1 and p2.name = :p2 */
-//        try {
-//            em.getTransaction().begin();
-//            Query query = em.createQuery("SELECT p FROM Person p"
-//                    + " JOIN p.address_id a "
-//                    + " JOIN a.address c"
-//                    //+ " WHERE c.city = cityname;"
-//                    , Person.class) .setParameter("cityname", cityname);;
-//            return query.getResultList();
-//        } finally {
-//            em.close();
-//        }
-//        
-//    }
+    public List<Person> getAllPersonsFromCity(String cityname) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT p FROM Person p"
+                    + " JOIN p.address a"
+                    + " JOIN a.cityInfo c"
+                    + " WHERE c.city =:cityname",
+                     Person.class).setParameter("cityname", cityname);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+
+    }
 }

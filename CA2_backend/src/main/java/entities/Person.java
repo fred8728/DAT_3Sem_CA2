@@ -49,7 +49,6 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     private List<Phone> phoneCollection = new ArrayList(); 
     
-
     @ManyToOne
     private Address address;
 
