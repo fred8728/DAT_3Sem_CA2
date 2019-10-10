@@ -197,6 +197,17 @@ public class RegisterFacade {
         CityInfo info2 = new CityInfo(3520, "Farum");
         Hobby hobby1 = new Hobby("Shopping", "Køber unødvendigt");
         Hobby hobby2 = new Hobby("Cykle", "Tour de france");
+        
+        
+        p1.addHobby(hobby1);
+        p1.addPhone(phone1);
+        add1.addPerson(p1);
+        info1.addAddress(add1);
+        
+        p2.addHobby(hobby2);
+        p2.addPhone(phone2);
+        add2.addPerson(p2);
+        info2.addAddress(add2);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
