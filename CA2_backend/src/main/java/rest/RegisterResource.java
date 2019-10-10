@@ -110,7 +110,7 @@ public class RegisterResource {
         return GSON.toJson(p);
     }
 
-    @Path("/get/{id}")
+    @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonDTO(@PathParam("id") int id) {
