@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -78,14 +79,7 @@ public class RegisterResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
-        
-    /* @Path("{id}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonById(@PathParam("id") int id) {
-        Person person = FACADE.getPersonByID(id);
-        return GSON.toJson(person);
-    }*/
+
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -98,7 +92,11 @@ public class RegisterResource {
                     @ApiResponse(responseCode = "400", description = "Persons not found")})*/
     public String getAllPersons() {
         List<Person> per = FACADE.getAllPersons();
-        return GSON.toJson(per);
+                List<PersonDTO> realPeople = new ArrayList<>();
+        for (int i = 0; i < per.size(); i++) {
+            realPeople.add(FACADE.makeDTO(per.get(i).getId()));
+        }
+        return GSON.toJson(realPeople);
     }
 
     @Path("/get/phone{phone}")
@@ -109,11 +107,12 @@ public class RegisterResource {
         return GSON.toJson(p);
     }
 
-    @Path("/get/{id}")
+    
+    @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonDTO(@PathParam("id") int id) {
-        PersonDTO p = FACADE.makeDTO(id, id);
+        PersonDTO p = FACADE.makeDTO(id);
         return GSON.toJson(p);
     }
 
@@ -126,14 +125,18 @@ public class RegisterResource {
         return "{\"msg\":\"Done\"}";
     }
 
-    /*
-    @Path("/get/all/{city}")
+    
+    @Path("/get/{city}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByCity(@PathParam("city") String city) {
-        List<Person> p = FACADE.getAllFromCity(city);
-        return GSON.toJson(p);
-    }*/
+        List<Person> p = FACADE.getAllPersonsFromCity(city);
+        List<PersonDTO> realPeople = new ArrayList<>();
+        for (int i = 0; i < p.size(); i++) {
+            realPeople.add(FACADE.makeDTO(p.get(i).getId()));
+        }
+        return GSON.toJson(realPeople);
+    }
 //    @Path("/get/all/{hobbie}")
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -196,7 +199,6 @@ public class RegisterResource {
 //        return GSON.toJson(p1);
 //        
 //    }
-//    }
-    
+
 }
 

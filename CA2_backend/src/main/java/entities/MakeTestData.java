@@ -69,9 +69,10 @@ public class MakeTestData {
         facade.getPersonByID(2);
         facade.editPerson(2, "brunhilde");
         System.out.println(facade.getAllPersons());
-    //    facade.getAllPersonsFromCity("Ishøj");
+        System.out.println(facade.getAllPersonsFromCity("Ishøj"));
         System.out.println(facade.getPersonByID(2));
-        System.out.println(facade.makeDTO(2, 2));
+        System.out.println(facade.makeDTO(2));
+        
         
     }
 }

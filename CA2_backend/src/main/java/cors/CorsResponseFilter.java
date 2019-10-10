@@ -17,7 +17,7 @@ import javax.ws.rs.ext.Provider;
  *
  * @author fskn
  */
-@Provider
+@Provider  //This will ensure that the filter is used "automatically"
 @PreMatching
 public class CorsResponseFilter implements ContainerResponseFilter {
 

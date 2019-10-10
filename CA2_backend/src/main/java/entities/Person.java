@@ -49,7 +49,6 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     private List<Phone> phoneCollection = new ArrayList(); 
     
-
     @ManyToOne
     private Address address;
 
@@ -63,7 +62,8 @@ public class Person implements Serializable {
         this.email = email;
         this.phoneCollection = new ArrayList();
         this.hobbyCollection = new ArrayList();
-    }
+    }    
+    
     
     public int getId() {
         return id;
