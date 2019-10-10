@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
 import entities.Person;
+import exceptions.PersonNotFoundException;
 import utils.EMF_Creator;
 import facades.RegisterFacade;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -116,8 +117,11 @@ public class RegisterResource {
     @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonDTO(@PathParam("id") int id) {
+    public String getPersonDTO(@PathParam("id") int id) throws PersonNotFoundException {
         PersonDTO p = FACADE.makeDTO(id);
+        if(p == null){
+            throw new PersonNotFoundException("id not found");
+        }
         return GSON.toJson(p);
     }
 
