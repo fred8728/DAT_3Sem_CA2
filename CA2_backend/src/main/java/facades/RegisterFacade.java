@@ -151,9 +151,21 @@ public class RegisterFacade {
         EntityManager em = getEntityManager();
         Person p = new Person(pdto.getFirstName(), pdto.getLastName(), pdto.getEmail());
         Address a = new Address(pdto.getAddress(), pdto.getAdditinalinfo());
+        CityInfo ci = new CityInfo(pdto.getZip(), pdto.getCity());
+        Phone ph = new Phone(pdto.getPhone(), "does not matter");
+        Hobby hob = new Hobby(pdto.getHobby(), "does not matter");
+        
         em.getTransaction().begin();
+        Phone mergedPhone = em.merge(ph);
+        CityInfo mergedCity =em.merge(ci);
         Address mergedAddress = em.merge(a);
+        Hobby mergedHobby = em.merge(hob);
+        
+        
+        a.setCityInfo(mergedCity);
         p.setAddress(mergedAddress);
+        ph.setPerson(p);
+        p.addHobby(mergedHobby);
         em.persist(p);
         em.getTransaction().commit();
         return new PersonDTO(p);
