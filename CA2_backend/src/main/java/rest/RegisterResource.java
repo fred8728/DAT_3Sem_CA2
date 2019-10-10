@@ -65,6 +65,14 @@ public class RegisterResource {
     private static final RegisterFacade FACADE = RegisterFacade.getRegisterFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    public List<PersonDTO> MakePersonDTOList(List<Person> p) {
+        List<PersonDTO> realPeople = new ArrayList<>();
+        for (int i = 0; i < p.size(); i++) {
+            realPeople.add(FACADE.makeDTO(p.get(i).getId()));
+        }
+        return realPeople;
+    }
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -91,12 +99,8 @@ public class RegisterResource {
                     @ApiResponse(responseCode = "200", description = "All persons"),                       
                     @ApiResponse(responseCode = "400", description = "Persons not found")})*/
     public String getAllPersons() {
-        List<Person> per = FACADE.getAllPersons();
-                List<PersonDTO> realPeople = new ArrayList<>();
-        for (int i = 0; i < per.size(); i++) {
-            realPeople.add(FACADE.makeDTO(per.get(i).getId()));
-        }
-        return GSON.toJson(realPeople);
+        List<Person> p = FACADE.getAllPersons();
+        return GSON.toJson(MakePersonDTOList(p));
     }
 
     @Path("/get/phone{phone}")
@@ -104,7 +108,7 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.getPersonByPhone(phone);
-        return GSON.toJson(p);
+        return GSON.toJson(FACADE.makeDTO(p.getId()));
     }
 
     
@@ -125,57 +129,47 @@ public class RegisterResource {
         return "{\"msg\":\"Done\"}";
     }
 
-    
     @Path("/get/{city}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonByCity(@PathParam("city") String city) {
         List<Person> p = FACADE.getAllPersonsFromCity(city);
-        List<PersonDTO> realPeople = new ArrayList<>();
-        for (int i = 0; i < p.size(); i++) {
-            realPeople.add(FACADE.makeDTO(p.get(i).getId()));
-        }
-        return GSON.toJson(realPeople);
+        return GSON.toJson(MakePersonDTOList(p));
     }
-//    @Path("/get/all/{hobbie}")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonByCity(@PathParam("hobbie") String hobbie) {
-//        List<Person> p = FACADE.findAllPersonswithHobbie(hobbie);
-//        return GSON.toJson(p);
-//    }
-//    @Path("/get/count/{hobbie}")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonByCity(@PathParam("hobbie") strring hobbie) {
-//        int p = FACADE.getAllHobbieCount(hobbie);
-//        return GSON.toJson(p);
-//    }
-    
-//    @Path("/get/all/zipcode")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getPersonByCity() {
-//        List<int> zipCodes = FACADE.getAllZipcodes();// add a method which returns all zipcodes in the system.
-//        return GSON.toJson(zipCodes);
-        
 
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{id}")
-//    public String editPerson(String personAsJson, @PathParam("id") int id) {
-////        Date date = new Date();
-//        
-//        Person pOrignal = FACADE.getPerson(id);
-//        Person NewPersonVal = GSON.fromJson(personAsJson, Person.class);
-//        pOrignal.setName(NewPersonVal.getName());
-//        pOrignal.setPhone(NewPersonVal.getPhone());
-//        pOrignal.setAddress(NewPersonVal.getAddress());
-//        
-//        // makes that the value return is on a good json format
-//        return GSON.toJson(pOrignal);
-//    }
+    @Path("/get/all/{hobbie}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonByHobby(@PathParam("hobbie") String hobbie) {
+        List<Person> p = FACADE.getPersonsWithSameHobby(hobbie);
+        return GSON.toJson(MakePersonDTOList(p));
+    }
+
+    @Path("/get/count/{hobbie}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getHobbyCount(@PathParam("hobbie") String hobbie) {
+        int p = FACADE.getSpecificHobbyCount(hobbie);
+
+        return GSON.toJson("count : " + p);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public String editPerson(String personAsJson, @PathParam("id") int id) {
+
+        Person pOrignal = FACADE.getPersonByID(id);
+        Person NewPersonVal = GSON.fromJson(personAsJson, Person.class);
+        pOrignal.setFirstName(NewPersonVal.getFirstName());
+        //pOrignal.setPhone(NewPersonVal.getPhone());
+        pOrignal.setAddress(NewPersonVal.getAddress());
+
+        // makes that the value return is on a good json format
+        return GSON.toJson(pOrignal);
+    }
+
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
