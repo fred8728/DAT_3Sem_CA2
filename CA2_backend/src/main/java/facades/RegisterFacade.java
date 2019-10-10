@@ -148,7 +148,7 @@ public class RegisterFacade {
 //        @Override
     public PersonDTO addPerson(PersonDTO pdto) {
         EntityManager em = getEntityManager();
-        Person p = new Person(pdto.getName(), pdto.getName(), pdto.getEmail());
+        Person p = new Person(pdto.getFirstName(), pdto.getLastName(), pdto.getEmail());
         Address a = new Address(pdto.getAddress(), pdto.getAdditinalinfo());
         em.getTransaction().begin();
         Address mergedAddress = em.merge(a);

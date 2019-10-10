@@ -19,10 +19,12 @@ import java.util.List;
 public class PersonDTO {
 
     private int id;
-    @Schema(required = true, example = "lise nielsen")
-    private String name;
+    @Schema(required = true, example = "lise")
+    private String firstName;
+        @Schema(required = true, example = "nielsen")
+    private String lastName;
     @Schema(required = true, example = "ringvejen")
-    private String address;
+    private String street;
     @Schema(required = true, example = "info")
     private String additinalinfo;
     @Schema(example = "[1,21212121,\"a phone number of johnny\"]")
@@ -33,20 +35,27 @@ public class PersonDTO {
     private String email;
     @Schema(example = "placeholder")
     private String city;
+    @Schema(example = "zipzip")
+    private int zip;
 
     public PersonDTO(Person p) {
         this.id = p.getId();
-        this.name = p.getFirstName() + " " + p.getLastName();
-        this.address = p.getAddress().getStreet();
-        this.additinalinfo = p.getAddress().getAdditionalinfo();
+        this.firstName = p.getFirstName();
+        this.lastName = p.getLastName();
+        this.email = p.getEmail();
+        Address a = p.getAddress();
+        if (a != null) {
+            this.street = a.getStreet();
+            this.zip = a.getCityInfo().getZipcode();
+            this.city = a.getCityInfo().getCity();
+            this.additinalinfo = a.getAdditionalinfo();
+        }
         for (int i = 0; i < p.getPhoneCollection().size(); i++) {
             this.phone += p.getPhoneCollection().get(i).getNumber();
         }
-        this.email = p.getEmail();
         for (int i = 0; i < p.getHobbyCollection().size(); i++) {
             this.hobby = p.getHobbyCollection().get(i).getName();
         }
-        this.city = p.getAddress().getCityInfo().getCity();
     }
 
     public int getId() {
@@ -55,14 +64,6 @@ public class PersonDTO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -74,11 +75,11 @@ public class PersonDTO {
     }
 
     public String getAddress() {
-        return address;
+        return street;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.street = address;
     }
 
     public int getPhone() {
@@ -113,9 +114,40 @@ public class PersonDTO {
         this.additinalinfo = additinalinfo;
     }
 
-    @Override
-    public String toString() {
-        return "PersonDTO{" + "id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", hobby=" + hobby + ", email=" + email + ", city=" + city + '}';
+    public String getFirstName() {
+        return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", street=" + street + ", additinalinfo=" + additinalinfo + ", phone=" + phone + ", hobby=" + hobby + ", email=" + email + ", city=" + city + ", zip=" + zip + '}';
+    }
 }
