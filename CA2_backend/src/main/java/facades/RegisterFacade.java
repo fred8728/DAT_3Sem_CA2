@@ -186,6 +186,7 @@ public class RegisterFacade {
 
     
     public void insertData(){
+        //Ikke fuck min metode
             EntityManager em = emf.createEntityManager();
             Address add1 = new Address("Villavej 5", "Ishøj");
             Address add2 = new Address("Villavej 167", "Farum");
