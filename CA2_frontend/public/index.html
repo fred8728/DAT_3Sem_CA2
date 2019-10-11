@@ -4,47 +4,62 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style.css" rel="stylesheet">
+
 </head>
 
+
 <body>
-    <button id = "but1">apidoc</button><br><br>
-  
-    <button id = "but4">Get all persons</button><br><br>
-    <button id = "but5">Get person with id</button><br><br>
-    <button id = "logdata">show log</button><br><br>
+  <div class="container">
+    <table>
 
-    <a href="https://frederikkesimone.dk/Register/openapi/">OpenAPI site</a><br><br>
+      <tr>
+        <button id="logdata">Log for sprint plan</button>
+      </tr>
+      <tr>
+        <button id="but1">apidoc</button>
+      </tr>
+      <tr>
+        <button id="allPersons">Get all persons</button>
+      </tr>
+       <tr>
+        <button id="but4">Get person with id</button>
+      </tr> 
+      <tr>
+        <button id="personID">Get person with id</button>
+        <form>
+          Id of user <input type="text" id="inp1" name="userid"><br>
+        </form>
+      </tr>
+    </table>
 
-<form>
-  Id of user <input type="text" id = "inp1" name="userid"><br>
+    <!-- <button id="logdata">Log for sprint plan</button><br><br>
+    <button id="but1">apidoc</button><br><br>
+    <button id="allPersons">Get all persons</button><br><br>
+    <button id="personID">Get person with id</button><br><br>
+     -->
 
-    <div id = "div1"> 
-      
-    </div>
-
-    <div id = "div2"> 
-
-    </div>
-
-    <div id = "div3">
-      
-    </div>
-    
-    <div id = "div4">
-      
-    </div>
-
-    <div id ="valueLog"> 
-
-
-    </div>
-
+    <a class="four" href="https://frederikkesimone.dk/Register/openapi/">OpenAPI site</a><br><br>
+  </div>
   <div class="container">
     
-    <br/>
-    <br/>
-    
-    <p id="jokes"> </p>
+    <div id="allPersonsRes">
+
+    </div>
+
+    <div id="personIDRes">
+
+    </div>
+    <div id="div1">
+
+    </div>
+
+    <div id="valueLog">
+
+    </div>
+  </div>
+  <br />
+
+  <!-- <p id="jokes"> </p> -->
   </div>
   <script src="bundle.js"></script>
 </body>

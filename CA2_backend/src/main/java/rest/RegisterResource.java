@@ -53,7 +53,6 @@ import javax.ws.rs.core.MediaType;
         }
 )
 
-
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
 public class RegisterResource {
@@ -93,13 +92,13 @@ public class RegisterResource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    /* @Operation(summary = "Get all persons in a list",
+    @Operation(summary = "Get all persons in a list",
             tags = {"persons"},
             responses = {
-                     @ApiResponse(
-                     content = @Content(mediaType = "application/json",schema = @Schema(implementation = PersonDTO.class))),
-                    @ApiResponse(responseCode = "200", description = "All persons"),                       
-                    @ApiResponse(responseCode = "400", description = "Persons not found")})*/
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getAllPersons() {
         List<Person> p = FACADE.getAllPersons();
         return GSON.toJson(MakePersonDTOList(p));
@@ -186,13 +185,11 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("{id}")
-    public String deletePerson(@PathParam("id") int id){
+    public String deletePerson(@PathParam("id") int id) {
         Person p = FACADE.getPersonByID(id);
         int id1 = p.getId();
         FACADE.deletePerson(id1);
         return "{}";
-   }
-
+    }
 
 }
-

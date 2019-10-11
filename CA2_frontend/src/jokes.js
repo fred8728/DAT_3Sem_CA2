@@ -31,4 +31,4 @@ const initialData = [
 const jokes = new Jokes(initialData);
 window.jokes = jokes; //Only for debugging
 
-export default jokes;
+export default jokes; //

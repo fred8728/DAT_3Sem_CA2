@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 
 //for fetching all users in JSON not tested
-document.getElementById("but4").addEventListener("click", function () {
+document.getElementById("allPersons").addEventListener("click", function () {
     fetch('http://localhost:8080/CA2/api/person/all'/* 'https://frederikkesimone.dk/Register/api/person/all' */)
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            document.getElementById("div4").innerHTML = PersonToHTMLTable(myJson);
+            document.getElementById("allPersonsRes").innerHTML = PersonToHTMLTable(myJson);
         });
 });
 
@@ -18,6 +18,8 @@ function PersonToHTMLTable(arr) {
     var arrHTML = arr.map(item => "<tr>"
         + "<td>" + item.id + "</td>"
         + "<td>" + item.name + "</td>"
+        /* + "<td>" + item.firstName + "</td>"
+        + "<td>" + item.lastName + "</td>" */
         + "<td>" + item.gender + "</td>"
         + "<td>" + item.address + "</td>"
         + "<td>" + item.phone + "</td>"
@@ -39,7 +41,7 @@ function PersonToHTMLTable(arr) {
     return result;
 }
 
-document.getElementById("but5").addEventListener("click", function () {
+document.getElementById("personID").addEventListener("click", function () {
     var test = document.getElementById("inp1");
     if(test === null){
 
@@ -53,7 +55,7 @@ document.getElementById("but5").addEventListener("click", function () {
             return response.json();
         })
         .then(function (myJson) {
-            document.getElementById("div3").innerHTML = PersonToHTML(myJson);
+            document.getElementById("personIDRes").innerHTML = PersonToHTML(myJson);
         });
 });
 
@@ -61,6 +63,8 @@ function PersonToHTML(item) {
     var arrHTML = "<tr>"
         + "<td>" + item.id + "</td>"
         + "<td>" + item.name + "</td>"
+        /* + "<td>" + item.firstName + "</td>"
+        + "<td>" + item.lastName + "</td>" */
         + "<td>" + item.address + "</td>"
         + "<td>" + item.phone + "</td>"
         + "<td>" + item.hobby + "</td>"
@@ -127,6 +131,11 @@ document.getElementById("logdata").addEventListener("click", function () {
         "Sprint three (Thursday 10/10- Sunday 13/10):" +
         "<li>" +
         "Complete the API (as much as you have time for)" +
+        "</li>" +
+        "<li>"+
+        "Implement a simple SPA which as a minimum must have the ability "+
+        "to use some of your GET endpoints and at least one POST endpoint. Consider pages like:"+
+        "</li>"+
         "<ul>" +
         "<li type = \"square\">" +
         "Get all persons with a given hobby" +

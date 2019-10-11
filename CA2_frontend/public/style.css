@@ -1,12 +1,25 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color:  #365582;
   }
   
   .container {
+     background-color:#c0c0c0;
      margin-top: 2em;
      max-width: 1200px;
      margin-left: auto;
      margin-right: auto;
+     
+  }
+  a.four:hover {
+     font-family:monospace;
+     font-size: 120%;
+   }
+
+  button:hover{
+     border: aqua;
+     border-top: 1px solid;
+   
   }
   

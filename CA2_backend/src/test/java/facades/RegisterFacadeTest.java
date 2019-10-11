@@ -31,6 +31,7 @@ public class RegisterFacadeTest {
     private Person p2 = new Person("Fred", "Mortensen Larsen", "kurt@hotmail.dk");
     private Person p3 = new Person("Emma", "Hansen", "ex@gmail.com");
     private Person p4 = new Person("Malene", "Hansen", "single@gmail.com");
+    private Person p5 = new Person("zuzuki", "Hansen", "wrom@gmail.com");
     private Address add1 = new Address("Mosebakken 5", "Greve");
     private Address add2 = new Address("Holmen 43", "Ishøj");
     private Address add3 = new Address("Blågaards plads", "København nv");
@@ -82,7 +83,7 @@ public class RegisterFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        
+
         p1.addHobby(hobby1);
         p2.addHobby(hobby2);
         p3.addHobby(hobby3);
@@ -189,7 +190,7 @@ public class RegisterFacadeTest {
     @Test
     public void addPersonTest() {
         Person p = new Person("Simone", "Sejesen", "simonesej@hotmail.com");
-        Address add = new Address("Ønskeøen", "New York");
+        Address add = new Address("Mosebakken 5", "Greve");
         Phone phone = new Phone(67899876, "Private number");
         CityInfo cinfo = new CityInfo(12345, "New York");
         Hobby hobby = new Hobby("Karate", "Slag og spark");
@@ -205,4 +206,44 @@ public class RegisterFacadeTest {
         Person p = facade.deletePerson(p1.getId());
         assertEquals(facade.getPersonCount(), 3);
     }
+
+    @Test
+    public void editPerson() {
+        p1 = facade.editPerson(p1.getId(), "Anders");
+        assertEquals("Anders", p1.getFirstName());
+
+    }
+
+    @Test
+    public void findPersonByCityBySize() {
+        Person p = new Person("Simone", "Sejesen", "simonesej@hotmail.com");
+        Address add = new Address("Ønskeøen", "New York");
+        Phone phone = new Phone(67899876, "Private number");
+        CityInfo cinfo = new CityInfo(2670, "Greve");
+        Hobby hobby = new Hobby("Karate", "Slag og spark");
+        Person p6 = facade.addPerson(p, phone, add, cinfo, hobby);
+        List<Person> pList = facade.getAllPersonsFromCity("Greve");
+
+        assertEquals(2, pList.size());
+    }
+
+    @Test
+    public void findPersonByCity() {
+        Person p = new Person("Simone", "Sejesen", "simonesej@hotmail.com");
+        Address add = new Address("Ønskeøen", "New York");
+        Phone phone = new Phone(67899876, "Private number");
+        CityInfo cinfo = new CityInfo(2670, "Greve");
+        Hobby hobby = new Hobby("Karate", "Slag og spark");
+        Person p6 = facade.addPerson(p, phone, add, cinfo, hobby);
+        List<Person> pList = facade.getAllPersonsFromCity("Greve");
+        List<String> checkList = new ArrayList();
+        List<String> testList = new ArrayList();
+        for (int i = 0; i < pList.size(); i++) {
+            testList.add(pList.get(i).getFirstName());
+        }
+        checkList.add("Ahmed");
+        checkList.add("Simone");
+        assertEquals(checkList, testList);
+    }
+
 }
