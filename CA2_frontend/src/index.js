@@ -41,10 +41,16 @@ function PersonToHTMLTable(arr) {
 }
 
 document.getElementById("personID").addEventListener("click", function () {
-    var test = document.getElementById("inp1");
-    if(test === null){
+    try {
+        var test = document.getElementById("inp1");
+        var addressCode = 'http://localhost:8080/CA2/api/person/' + test;
+        console.log(addressCode)
+        if (test === undefined) {
 
-        alert("insert a value which is instantiated!")
+            alert("insert a value which is instantiated!")
+        }
+    } catch (err) {
+        console.log("hello?")
     }
     console.log(test.value);
     console.log(test);
@@ -56,6 +62,9 @@ document.getElementById("personID").addEventListener("click", function () {
         .then(function (myJson) {
             document.getElementById("personIDRes").innerHTML = PersonToHTML(myJson);
         });
+
+
+
 });
 
 function PersonToHTML(item) {
@@ -131,10 +140,10 @@ document.getElementById("logdata").addEventListener("click", function () {
         "<li>" +
         "Complete the API (as much as you have time for)" +
         "</li>" +
-        "<li>"+
-        "Implement a simple SPA which as a minimum must have the ability "+
-        "to use some of your GET endpoints and at least one POST endpoint. Consider pages like:"+
-        "</li>"+
+        "<li>" +
+        "Implement a simple SPA which as a minimum must have the ability " +
+        "to use some of your GET endpoints and at least one POST endpoint. Consider pages like:" +
+        "</li>" +
         "<ul>" +
         "<li type = \"square\">" +
         "Get all persons with a given hobby" +
