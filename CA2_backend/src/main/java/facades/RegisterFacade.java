@@ -148,11 +148,23 @@ public class RegisterFacade {
 //        @Override
     public PersonDTO addPerson(PersonDTO pdto) {
         EntityManager em = getEntityManager();
-        Person p = new Person(pdto.getName(), pdto.getName(), pdto.getEmail());
+        Person p = new Person(pdto.getFirstName(), pdto.getLastName(), pdto.getEmail());
         Address a = new Address(pdto.getAddress(), pdto.getAdditinalinfo());
+        CityInfo ci = new CityInfo(pdto.getZip(), pdto.getCity());
+        Phone ph = new Phone(pdto.getPhone(), "does not matter");
+        Hobby hob = new Hobby(pdto.getHobby(), "does not matter");
+        
         em.getTransaction().begin();
+        Phone mergedPhone = em.merge(ph);
+        CityInfo mergedCity =em.merge(ci);
         Address mergedAddress = em.merge(a);
+        Hobby mergedHobby = em.merge(hob);
+        
+        
+        a.setCityInfo(mergedCity);
         p.setAddress(mergedAddress);
+        ph.setPerson(p);
+        p.addHobby(mergedHobby);
         em.persist(p);
         em.getTransaction().commit();
         return new PersonDTO(p);
@@ -200,8 +212,8 @@ public class RegisterFacade {
     public void insertData() {
         //Ikke fuck min metode
         EntityManager em = emf.createEntityManager();
-        Address add1 = new Address("Villavej 5", "Ishøj");
-        Address add2 = new Address("Villavej 167", "Farum");
+        Address add1 = new Address("Villavej 5", "først vej til højre");
+        Address add2 = new Address("Villavej 167", "kom ind ad bagindgangen");
         Person p1 = new Person("Kurt", "Frandsen", "Enator@hotmail.com");
         Person p2 = new Person("Frede", "Larsen", "Fredelars@hotmail.com");
         Phone phone1 = new Phone(87654321, "My number");
