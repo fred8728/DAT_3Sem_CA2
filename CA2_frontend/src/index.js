@@ -12,7 +12,6 @@ document.getElementById("allPersons").addEventListener("click", function () {
             document.getElementById("allPersonsRes").innerHTML = PersonToHTMLTable(myJson);
         });
 });
-
 //not sure about what values will be displayed in the Json but need to fix them below
 function PersonToHTMLTable(arr) {
     var arrHTML = arr.map(item => "<tr>"
