@@ -117,14 +117,12 @@ public class RegisterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonDTO(@PathParam("id") int id) throws PersonNotFoundException {
+        try{
         PersonDTO p = FACADE.makeDTO(id);
-//        if(p == null){
-//            throw new PersonNotFoundException("id not found");
-//        }
-//        if(id != p.getId()){
-//            throw new PersonNotFoundException("id not found");
-//        }
         return GSON.toJson(p);
+        }catch(Exception e){
+            throw new PersonNotFoundException("id not found");
+        }
     }
 
     @Path("/insertdata")
