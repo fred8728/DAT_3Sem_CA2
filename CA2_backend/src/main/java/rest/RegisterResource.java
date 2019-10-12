@@ -119,9 +119,12 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getPersonDTO(@PathParam("id") int id) throws PersonNotFoundException {
         PersonDTO p = FACADE.makeDTO(id);
-        if(p == null){
-            throw new PersonNotFoundException("id not found");
-        }
+//        if(p == null){
+//            throw new PersonNotFoundException("id not found");
+//        }
+//        if(id != p.getId()){
+//            throw new PersonNotFoundException("id not found");
+//        }
         return GSON.toJson(p);
     }
 
