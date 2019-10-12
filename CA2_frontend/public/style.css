@@ -29,10 +29,21 @@ body {
    border-collapse: collapse; 
    
   }
-  .inputValues tr{
-   border: 1px solid orange;
+  .inputValues tr:nth-child(even) {
+   border-bottom: 1px solid lightgreen;
   }
-  .inputValues td{
-   border: 1px solid orange;
+  .inputValues tr:nth-child(odd) { /* some real spice right here */
+   border-bottom: 1px solid rgb(4, 5, 5);
   }
+  .inputValues label{
+   display: inline-block; 
+   float: left;
+    clear: left;
+    text-align: left;
+  }
+  .inputValues input {
+   display: inline-block;
+   float: right;
+ }
+
   
