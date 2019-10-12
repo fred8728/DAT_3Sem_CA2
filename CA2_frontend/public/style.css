@@ -10,6 +10,8 @@ body {
      max-width: 1200px;
      margin-left: auto;
      margin-right: auto;
+     margin: 15px;
+     padding:10px;
      
   }
   a.four:hover {
@@ -21,5 +23,16 @@ body {
      border: aqua;
      border-top: 1px solid;
    
+  }
+  
+  .inputValues tr {
+   border-collapse: collapse; 
+   
+  }
+  .inputValues tr{
+   border: 1px solid orange;
+  }
+  .inputValues td{
+   border: 1px solid orange;
   }
   

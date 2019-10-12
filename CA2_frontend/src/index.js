@@ -168,7 +168,7 @@ document.getElementById("logdata").addEventListener("click", function () {
 });
 
 document.getElementById("but1").addEventListener("click", function () {
-    document.getElementById("div1").innerHTML = "<table border=" + "1px>" +
+    document.getElementById("valueLog").innerHTML = "<table border=" + "1px>" +
         " <tr>" +
         "<th width = 100px>Method</th>" +
         "<th width = 100px>Endpoint</th>" +

@@ -9,23 +9,32 @@
 
 
 <body>
+  <a class="four" href="https://frederikkesimone.dk/Register/openapi/">OpenAPI site</a><br>
   <div class="container">
     <table>
 
       <tr>
-        <button id="logdata">Log for sprint plan</button>
+        <td>
+          <button id="logdata">Log for sprint plan</button>
+        </td>
       </tr>
       <tr>
-        <button id="but1">apidoc</button>
+        <td>
+          <button id="but1">apidoc</button>
+        </td>
       </tr>
       <tr>
-        <button id="allPersons">Get all persons</button>
+        <td>
+          <button id="allPersons">Get all persons</button>
+        </td>
       </tr>
       <tr>
-        <button id="personID">Get person with id</button>
-        <form>
-          Id of user <input type="text" id="inp1" name="userid"><br>
-        </form>
+        <td>
+          <button id="personID">Get person with id</button>
+          <form>
+            Id of user <input type="text" id="inp1" name="userid"><br>
+          </form>
+        </td>
       </tr>
     </table>
 
@@ -35,10 +44,64 @@
     <button id="personID">Get person with id</button><br><br>
      -->
 
-    <a class="four" href="https://frederikkesimone.dk/Register/openapi/">OpenAPI site</a><br><br>
+
   </div>
   <div class="container">
-    
+    <div class="inputValues">
+      <table>
+        <tr>
+          <td>
+            <form id="inputdata">
+              FirstName <input type="text" id="inp1" name="fistName"><br>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="inputdata">
+              LastName <input type="text" id="inp1" name="lastName"><br>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="inputdata">
+              Street <input type="text" id="inp1" name="street"><br>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="inputdata">
+              Phone <input type="text" id="inp1" name="phone"><br>
+              </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="inputdata">
+              Hobby <input type="text" id="inp1" name="hobby"><br>
+              </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="inputdata">
+              email <input type="text" id="inp1" name="email"><br>
+              </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="personID">Add person</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+
     <div id="allPersonsRes">
 
     </div>
@@ -46,13 +109,13 @@
     <div id="personIDRes">
 
     </div>
-    <div id="div1">
-
-    </div>
 
     <div id="valueLog">
 
     </div>
+    <div id="personComfirm">
+
+      </div>
   </div>
   <br />
 
