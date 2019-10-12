@@ -197,12 +197,12 @@ public class RegisterFacade {
         return p;
     }
 
-    public Person editPerson(int personId, String newName) {
+    public Person editPerson(int personId, String newFirstName) {
         EntityManager em = emf.createEntityManager();
         Person p = em.find(Person.class, personId);
         try {
             em.getTransaction().begin();
-            p.setFirstName(newName);
+            p.setFirstName(newFirstName);
             em.getTransaction().commit();
         } finally {
             em.close();
