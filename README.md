@@ -10,12 +10,15 @@
   have resulted in only being able to make the basic conditions for
   this project with not much space for implementing more advanced things.
   
+- About the scrum part of this project, has there been 
+  a great improvement in talking between the members and 
+  a better idea on what to do at in the most part of the project.
+  
 - There are two folders in this project, one for the SPA 
   and the other for the REST-API where the DTO is created.<br>
   Here are two links to the documents 
   
-  - [Front end](<https://github.com/fred8728/CA_2/tree/master/CA2_frontend>)
-  - [Back end](<https://github.com/fred8728/CA_2/tree/master/CA2_backend>)
+  - ## [Front end](<https://github.com/fred8728/CA_2/tree/master/CA2_frontend>)
+  - ## [Back end](<https://github.com/fred8728/CA_2/tree/master/CA2_backend>)
 
   
-## 
