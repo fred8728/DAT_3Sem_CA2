@@ -108,6 +108,13 @@ public class RegisterResource {
     @Path("/get/phone{phone}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get all persons in a list",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getPersonByPhone(@PathParam("phone") int phone) {
         Person p = FACADE.getPersonByPhone(phone);
         return GSON.toJson(FACADE.makeDTO(p.getId()));
@@ -116,11 +123,18 @@ public class RegisterResource {
     @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get all persons in a list",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getPersonDTO(@PathParam("id") int id) throws PersonNotFoundException {
-        try{
-        PersonDTO p = FACADE.makeDTO(id);
-        return GSON.toJson(p);
-        }catch(Exception e){
+        try {
+            PersonDTO p = FACADE.makeDTO(id);
+            return GSON.toJson(p);
+        } catch (Exception e) {
             throw new PersonNotFoundException("id not found");
         }
     }
@@ -128,6 +142,13 @@ public class RegisterResource {
     @Path("/insertdata")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Insert person",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String insertData() {
 
         FACADE.insertData();
@@ -137,6 +158,13 @@ public class RegisterResource {
     @Path("/get/{city}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get a person by city name",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getPersonByCity(@PathParam("city") String city) {
         List<Person> p = FACADE.getAllPersonsFromCity(city);
         return GSON.toJson(MakePersonDTOList(p));
@@ -145,6 +173,13 @@ public class RegisterResource {
     @Path("/get/all/{hobbie}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get a person by hobby",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getPersonByHobby(@PathParam("hobbie") String hobbie) {
         List<Person> p = FACADE.getPersonsWithSameHobby(hobbie);
         return GSON.toJson(MakePersonDTOList(p));
@@ -153,6 +188,13 @@ public class RegisterResource {
     @Path("/get/count/{hobbie}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get hobby count",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String getHobbyCount(@PathParam("hobbie") String hobbie) {
         int p = FACADE.getSpecificHobbyCount(hobbie);
 
@@ -163,6 +205,13 @@ public class RegisterResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
+    @Operation(summary = "Get person by id",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String editPerson(String personAsJson, @PathParam("id") int id) {
 
         Person pOrignal = FACADE.getPersonByID(id);
@@ -178,6 +227,13 @@ public class RegisterResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Add a person",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String addPerson(String personAsJson) {
         PersonDTO personNew = GSON.fromJson(personAsJson, PersonDTO.class);
         PersonDTO p = FACADE.addPerson(personNew);
@@ -190,6 +246,13 @@ public class RegisterResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("{id}")
+    @Operation(summary = "Delete a person",
+            tags = {"persons"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))),
+                @ApiResponse(responseCode = "200", description = "All persons"),
+                @ApiResponse(responseCode = "404", description = "Persons not found")})
     public String deletePerson(@PathParam("id") int id) {
         Person p = FACADE.getPersonByID(id);
         int id1 = p.getId();
