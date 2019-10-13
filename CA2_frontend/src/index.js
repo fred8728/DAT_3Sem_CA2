@@ -90,11 +90,81 @@ function PersonToHTML(item) {
         + arrHTML + "</table>";
     return result;
 }
+// implemented POST method 
+document.getElementById("personADD").addEventListener("click", function () {
+    var firstName = document.getElementById("firstName");
+    var lastName = document.getElementById("lastName");
+    var street = document.getElementById("street");
+    var info = document.getElementById("info");
+    var phone = document.getElementById("phone");
+    var hobby = document.getElementById("hobby");
+    var email = document.getElementById("email");
+    var city = document.getElementById("city");
+    var zipCode = document.getElementById("zip");
 
+    var dataVALUE = {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            firstname: firstName,
+            lastname: lastName,
+            street: street,
+            additinalinfo: info,
+            phone: phone,
+            hobby: hobby,
+            email: email,
+            city: city,
+            zip: zipCode
+        })
+    }
 
+    fetch("http://localhost:8080/CA2/api/person", dataVALUE)
+    document.getElementById("valueLog").innerHTML = "<p> Data has been added</p>"
+
+})
+
+// implemented PUT method 
+document.getElementById("personEDIT").addEventListener("click", function () {
+    var firstName = document.getElementById("firstName");
+    var lastName = document.getElementById("lastName");
+    var street = document.getElementById("street");
+    var info = document.getElementById("info");
+    var phone = document.getElementById("phone");
+    var hobby = document.getElementById("hobby");
+    var email = document.getElementById("email");
+    var city = document.getElementById("city");
+    var zipCode = document.getElementById("zip");
+    var id = document.getElementById("PersonID");
+
+    var dataVALUE = {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            firstname: firstName,
+            lastname: lastName,
+            street: street,
+            additinalinfo: info,
+            phone: phone,
+            hobby: hobby,
+            email: email,
+            city: city,
+            zip: zipCode
+        })
+    }
+
+    fetch("http://localhost:8080/CA2/api/person/" + id, dataVALUE)
+    document.getElementById("valueLog").innerHTML = "<p> Data has been added</p>"
+
+})
 
 document.getElementById("logdata").addEventListener("click", function () {
-    document.getElementById("valueLog").innerHTML =  //" boi bithc";
+    document.getElementById("valueLog").innerHTML =  
         "<p> The following is a list of the sprint log which we have chosen to make for this project <br>" +
         "it has been split into tree mini sprint which is shown in the list down below. <br>" +
         "There will be tried to complete as many of the given task as possible in the following week to this project." +

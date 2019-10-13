@@ -10,8 +10,10 @@ body {
      max-width: 1200px;
      margin-left: auto;
      margin-right: auto;
-     margin: 15px;
-     padding:10px;
+     margin: 5%;
+     padding:5%;
+     min-width: 45%;
+     
      
   }
   a.four:hover {
@@ -20,9 +22,7 @@ body {
    }
 
   button:hover{
-     border: aqua;
-     border-top: 1px solid;
-   
+     border-top: 1px solid; 
   }
   
   .inputValues tr {
@@ -45,5 +45,19 @@ body {
    display: inline-block;
    float: right;
  }
+ 
+  .editValues input {
+   display: inline-block;
+   float: right;
+ }
+ /* .inputValues table {
+    background-color:#365582 ;
+    padding: 5%;
+    float: left;
+    clear: none;
+ }
+ .container{
+float: center;
+ } */
 
   

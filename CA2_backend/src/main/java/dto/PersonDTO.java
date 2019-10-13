@@ -26,7 +26,7 @@ public class PersonDTO {
     @Schema(required = true, example = "ringvejen")
     private String street;
     @Schema(required = true, example = "info")
-    private String additinalinfo;
+        private String additinalinfo;
     @Schema(example = "[1,21212121,\"a phone number of johnny\"]")
     private int phone;
     @Schema(example = "[\"Looking at Tom Hanks\",\"Fishing\"]")
